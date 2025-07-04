@@ -274,8 +274,10 @@
 
 
 .wizard-content {
-  padding: 30px 40px;
+  padding: 20px 30px; /* Reducido el padding vertical y horizontal */
   background: #f7fafd; /* Fondo muy claro para el contenido */
+  flex-grow: 1; /* Permite que el contenido crezca si hay espacio */
+  /* overflow-y: auto; */ /* Quitado para que el scroll lo maneje el contenedor principal si es necesario */
 }
 
 .wizard-step-content {
@@ -341,7 +343,7 @@
   min-height: 150px; /* Altura mínima para ver varios items */
   margin-bottom: 20px; /* Espacio antes de la navegación */
   box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
-  max-height: 350px;
+  max-height: 280px;  /* Reducido para evitar scroll */
   overflow-y: auto;
   border: 1px solid #d3dde6;
 }
@@ -2871,15 +2873,15 @@ var _elementosPanelActuales = [];
 function abrirPanelSelector(elementos, titulo, callback) {
   _elementosPanelActuales = elementos.slice();
   _callbackSeleccionUniversal = callback;
-  document.getElementById('buscador-panel-selector').value = '';
-  document.getElementById('panel-lateral-titulo').innerText = titulo || 'Selecciona un elemento';
-  mostrarElementosEnPanelSelector('');
-  mostrarPanelLateralSelector(true);
-  setTimeout(function(){document.getElementById('buscador-panel-selector').focus();}, 100);
+  document.getElementById('buscador-panel-selector').value = ''; // Asume que este es el ID para V1
+  document.getElementById('panel-lateral-titulo').innerText = titulo || 'Selecciona un elemento'; // Asume V1
+  mostrarElementosEnPanelSelector(''); // Asume V1
+  mostrarPanelLateralSelector(true); // Asume V1
+  setTimeout(function(){document.getElementById('buscador-panel-selector').focus();}, 100); // Asume V1
 }
 
 function mostrarPanelLateralSelector(abrir) {
-  var panel = document.getElementById('panel-lateral-selector');
+  var panel = document.getElementById('panel-lateral-selector'); // Asume V1
   if (abrir) {
     if (panel.className.indexOf('abierto') === -1) {
       panel.className += (panel.className ? ' ' : '') + 'abierto';
@@ -2891,27 +2893,35 @@ function mostrarPanelLateralSelector(abrir) {
   }
 }
 
-document.getElementById('cerrar-panel-selector-btn').onclick = function(){
+document.getElementById('cerrar-panel-selector-btn').onclick = function(){ // Asume V1
   mostrarPanelLateralSelector(false);
   _callbackSeleccionUniversal = null;
 };
+// Este if/else para addEventListener/attachEvent es para el panel V1. Se necesitará uno similar para V2.
 if (document.attachEvent) {
   document.attachEvent('onkeydown', function(e){
     e = e || window.event;
     var key = e.keyCode;
-    if (key === 27) mostrarPanelLateralSelector(false);
+    // Cierra CUALQUIER panel lateral abierto con Escape. Podríamos hacerlo más específico si es necesario.
+    if (key === 27) {
+        mostrarPanelLateralSelector(false);
+        mostrarPanelLateralSelectorV2(false);
+    }
   });
 } else if (document.addEventListener) {
   document.addEventListener('keydown', function(e){
-    if ((e.key && e.key === "Escape") || (e.keyCode && e.keyCode === 27)) mostrarPanelLateralSelector(false);
+    if ((e.key && e.key === "Escape") || (e.keyCode && e.keyCode === 27)) {
+        mostrarPanelLateralSelector(false);
+        mostrarPanelLateralSelectorV2(false);
+    }
   });
 }
-document.getElementById('buscador-panel-selector').oninput = function() {
+document.getElementById('buscador-panel-selector').oninput = function() { // Asume V1
   mostrarElementosEnPanelSelector(this.value);
 };
 
-function mostrarElementosEnPanelSelector(filtro) {
-  var lista = document.getElementById('lista-panel-selector');
+function mostrarElementosEnPanelSelector(filtro) { // Para V1
+  var lista = document.getElementById('lista-panel-selector'); // Asume V1
   lista.innerHTML = '';
   filtro = filtro.toLowerCase();
   var hay = false;
@@ -2920,7 +2930,8 @@ function mostrarElementosEnPanelSelector(filtro) {
     if (filtro && el.nombre.toLowerCase().indexOf(filtro) === -1) continue;
     hay = true;
     var div = document.createElement('div');
-    div.className = 'tarjeta-panel-selector';
+    div.className = 'tarjeta-panel-selector'; // Estilo genérico, ok
+    // Estilos en línea podrían quedarse si son genéricos o se ajustan con clases específicas de V1/V2 si es necesario
     div.style = [
       'background:#eaf0f7',
       'border-radius:8px',
@@ -2946,7 +2957,7 @@ function mostrarElementosEnPanelSelector(filtro) {
     div.onmousedown = (function(nombre){
       return function(e) {
         e.preventDefault();
-        seleccionarElementoDesdePanel(encodeURIComponent(nombre));
+        seleccionarElementoDesdePanel(encodeURIComponent(nombre)); // Asume V1
       };
     })(el.nombre);
     lista.appendChild(div);
@@ -2969,17 +2980,99 @@ function mostrarElementosEnPanelSelector(filtro) {
     }
   }, 50);
 
-function seleccionarElementoDesdePanel(nombre) {
+function seleccionarElementoDesdePanel(nombre) { // Para V1
   var nombreDec = decodeURIComponent(nombre);
-  mostrarPanelLateralSelector(false);
-  // Muestra el nombre seleccionado en el div correspondiente (ajusta el id si es necesario)
-  var divSeleccion = document.getElementById('subcaso-oficio-seleccionado');
+  mostrarPanelLateralSelector(false); // Asume V1
+  var divSeleccion = document.getElementById('subcaso-oficio-seleccionado'); // Asume V1
   if (divSeleccion) {
     divSeleccion.innerText = nombreDec;
   }
   if (_callbackSeleccionUniversal) _callbackSeleccionUniversal(nombreDec);
 }
 var subcasoOficioSeleccionado = "";
+
+// --- FUNCIONES PARA PANEL LATERAL V2 ---
+var _callbackSeleccionUniversalV2 = null;
+var _elementosPanelActualesV2 = [];
+
+function abrirPanelSelectorV2(elementos, titulo, callback) {
+  _elementosPanelActualesV2 = elementos.slice();
+  _callbackSeleccionUniversalV2 = callback;
+  document.getElementById('buscador-panel-selector-v2').value = '';
+  document.getElementById('panel-lateral-titulo-v2').innerText = titulo || 'Selecciona un elemento';
+  mostrarElementosEnPanelSelectorV2('');
+  mostrarPanelLateralSelectorV2(true);
+  setTimeout(function(){document.getElementById('buscador-panel-selector-v2').focus();}, 100);
+}
+
+function mostrarPanelLateralSelectorV2(abrir) {
+  var panel = document.getElementById('panel-lateral-selector-v2');
+  if (abrir) {
+    // Asegurarse que el panel V1 esté cerrado
+    mostrarPanelLateralSelector(false);
+    if (panel.className.indexOf('abierto') === -1) {
+      panel.className += (panel.className ? ' ' : '') + 'abierto';
+    }
+    panel.style.right = "0";
+  } else {
+    panel.className = panel.className.replace(/\babierto\b/g, '').replace(/\s{2,}/g, ' ').replace(/^\s+|\s+$/g, '');
+    panel.style.right = "-410px";
+  }
+}
+
+document.getElementById('cerrar-panel-selector-btn-v2').onclick = function(){
+  mostrarPanelLateralSelectorV2(false);
+  _callbackSeleccionUniversalV2 = null;
+};
+// El event listener de Escape ya es genérico y cierra ambos paneles.
+
+document.getElementById('buscador-panel-selector-v2').oninput = function() {
+  mostrarElementosEnPanelSelectorV2(this.value);
+};
+
+function mostrarElementosEnPanelSelectorV2(filtro) {
+  var lista = document.getElementById('lista-panel-selector-v2');
+  lista.innerHTML = '';
+  filtro = filtro.toLowerCase();
+  var hay = false;
+  for (var i = 0; i < _elementosPanelActualesV2.length; i++) {
+    var el = _elementosPanelActualesV2[i];
+    if (filtro && el.nombre.toLowerCase().indexOf(filtro) === -1) continue;
+    hay = true;
+    var div = document.createElement('div');
+    div.className = 'tarjeta-panel-selector'; // Reutiliza la clase si el estilo es el mismo
+    // Aplicar estilos en línea si son necesarios o usar una clase específica para V2 si el estilo del item cambia
+    div.innerHTML =
+      '<div style="font-weight:600;color:#17406a;margin-bottom:3px;pointer-events:none;white-space:normal;word-break:normal;overflow-wrap:break-word;line-height:1.5;max-width:99%;">' +
+        el.nombre +
+      '</div>' +
+      '<div style="font-size:.96em;color:#285080;pointer-events:none;line-height:1.5;">Words almacenados: ' + el.cantidadWords + '</div>';
+    div.onmousedown = (function(nombre){
+      return function(e) {
+        e.preventDefault();
+        seleccionarElementoDesdePanelV2(encodeURIComponent(nombre));
+      };
+    })(el.nombre);
+    lista.appendChild(div);
+  }
+  if (!hay) {
+    var vacio = document.createElement('div');
+    vacio.style.color = "#aaa";
+    vacio.style.padding = "16px 8px";
+    vacio.innerHTML = "No hay elementos que coincidan";
+    lista.appendChild(vacio);
+  }
+}
+
+function seleccionarElementoDesdePanelV2(nombre) {
+  var nombreDec = decodeURIComponent(nombre);
+  mostrarPanelLateralSelectorV2(false);
+  // No actualiza directamente el div 'subcaso-oficio-seleccionado-v2' aquí,
+  // eso lo hará la función de callback que se pasa a abrirPanelSelectorV2
+  if (_callbackSeleccionUniversalV2) _callbackSeleccionUniversalV2(nombreDec);
+}
+// --- FIN FUNCIONES PANEL LATERAL V2 ---
+
 
 function abrirSelectorSubcasoOficio() {
   var anio = document.getElementById('select-anio-oficio').value;
@@ -3742,8 +3835,8 @@ function abrirSelectorSubcasoOficioV2() {
   // Esta implementación asume que el panel lateral es genérico y se reutiliza.
   // Si duplicaste el panel HTML con IDs -v2, debes llamar a una versión -v2 de abrirPanelSelector.
   // Por simplicidad, aquí asumimos que el panel es el mismo y solo cambia el callback y los datos.
-  abrirPanelSelector(subcasos, "Selecciona un subcaso (v2)", function(nombre){
-    subcasoOficioSeleccionadoV2 = (nombre === "(Sin subcaso)") ? "" : nombre;
+  abrirPanelSelectorV2(subcasos, "Selecciona un subcaso", function(nombreCallback){ //Llamar a la V2
+    subcasoOficioSeleccionadoV2 = (nombreCallback === "(Sin subcaso)") ? "" : nombreCallback;
     mostrarSubcasoSeleccionadoV2(subcasoOficioSeleccionadoV2);
   });
 }
@@ -3920,7 +4013,10 @@ function limpiarCamposCrearOficioV2() {
   // document.getElementById("paso2-elegir-destino-v2").style.display = "none"; // Incorrecto para wizard
 
   if (recargarFormatos !== false) { // Permite no recargar formatos si se llama desde la inicialización de la sección
-    cargarFormatosOficiosV2();
+    // La llamada a cargarFormatosOficiosV2() ya está en la inicialización de la sección (mostrarSeccion)
+    // y al volver al paso 1 del wizard si es necesario.
+    // No es necesario llamarla aquí explícitamente otra vez si recargarFormatos es true,
+    // ya que limpiarCamposCrearOficioV2 se llama con false desde mostrarSeccion.
   }
   renderizarListaFormatosV2(); // Para quitar la selección visual del formato
   actualizarNotaCasoOficioV2();
