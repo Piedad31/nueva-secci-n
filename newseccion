@@ -152,7 +152,7 @@
 }
 
 .wizard-header {
-  background: #0d2c4f; /* Azul oscuro corporativo */
+  background: #17406a; /* Azul corporativo original, más claro que #0d2c4f */
   color: #fff;
   padding: 25px 35px;
   text-align: center;
@@ -3566,13 +3566,13 @@ function wizardV2IrAPaso(numeroPaso) {
   var steps = document.querySelectorAll("#seccion-crear-oficios-v2 .wizard-step");
   var connectors = document.querySelectorAll("#seccion-crear-oficios-v2 .wizard-step-connector");
 
-  steps.forEach(function(step) {
-    step.classList.remove('active');
-    step.classList.remove('completed');
-  });
-  connectors.forEach(function(connector) {
-    connector.classList.remove('active');
-  });
+  for (var i = 0; i < steps.length; i++) {
+    steps[i].classList.remove('active');
+    steps[i].classList.remove('completed');
+  }
+  for (var j = 0; j < connectors.length; j++) {
+    connectors[j].classList.remove('active');
+  }
 
   // Mostrar el contenido del paso actual y activar el indicador y los anteriores como completados
   document.getElementById("wizard-v2-step-" + numeroPaso).classList.add("active");
