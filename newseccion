@@ -3642,10 +3642,23 @@ function renderizarListaFormatosV2() {
 }
 
 function seleccionarFormatoV2(idx) {
-  formatoSeleccionadoV2 = formatosFiltradosV2[idx];
-  // No cambiamos de paso aquí directamente, solo actualizamos la UI del paso actual
-  renderizarListaFormatosV2(); // Para que se actualice el resaltado del formato seleccionado
-  // Opcional: podríamos poner un pequeño feedback visual de que se seleccionó.
+  // --- DEBUG ---
+  // alert("seleccionarFormatoV2 llamado con idx: " + idx + "\nformatosFiltradosV2.length: " + (formatosFiltradosV2 ? formatosFiltradosV2.length : "N/A"));
+  // --- FIN DEBUG ---
+
+  if (formatosFiltradosV2 && idx >= 0 && idx < formatosFiltradosV2.length && formatosFiltradosV2[idx] && typeof formatosFiltradosV2[idx].Nombre !== 'undefined') {
+    formatoSeleccionadoV2 = formatosFiltradosV2[idx];
+    // --- DEBUG ---
+    // alert("Formato seleccionado en seleccionarFormatoV2: " + formatoSeleccionadoV2.Nombre + "\nRuta: " + formatoSeleccionadoV2.Ruta);
+    // --- FIN DEBUG ---
+  } else {
+    // --- DEBUG ---
+    // alert("Error en seleccionarFormatoV2: idx inválido o formato sin nombre.\nidx: " + idx +
+    //       "\nformatosFiltradosV2[idx]: " + (formatosFiltradosV2 && formatosFiltradosV2[idx] ? JSON.stringify(formatosFiltradosV2[idx]) : "N/A"));
+    // --- FIN DEBUG ---
+    formatoSeleccionadoV2 = null; // Asegurar que quede nulo si hay error
+  }
+  renderizarListaFormatosV2();
 }
 
 function volverPaso1V2() { // Esta función ya no es necesaria en el flujo del wizard, se usa wizardV2IrAPaso()
@@ -3656,9 +3669,16 @@ function volverPaso1V2() { // Esta función ya no es necesaria en el flujo del w
 var pasoActualWizardV2 = 1;
 
 function wizardV2IrAPaso(numeroPaso) {
+  // --- DEBUG ---
+  // if (pasoActualWizardV2 === 1 && numeroPaso === 2) {
+  //   alert("Intentando ir al paso 2. formatoSeleccionadoV2: " + (formatoSeleccionadoV2 ? formatoSeleccionadoV2.Nombre : "null"));
+  // }
+  // --- FIN DEBUG ---
+
   // Validaciones antes de avanzar de paso
   if (numeroPaso > pasoActualWizardV2) { // Solo valida al avanzar
     if (pasoActualWizardV2 === 1 && !formatoSeleccionadoV2) {
+      // alert("Validación falló: Por favor, seleccione un formato antes de continuar."); // Ya está la alerta interna
       alert("Por favor, seleccione un formato antes de continuar.");
       return;
     }
