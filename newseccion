@@ -138,141 +138,368 @@
   margin-top: 14px;
 }
 
-/* ESTILOS PARA SECCIÓN CREAR OFICIOS V2 */
-.form-block-oficio-v2 {
-  background: #e8f0f7; /* Fondo más claro */
-  border-radius: 12px;
-  box-shadow: 0 6px 22px #17406a20; /* Sombra más pronunciada */
-  border: 1px solid #adc8e6; /* Borde azulado */
-  max-width: 600px; /* Un poco más ancho */
-  margin: 40px auto 0 auto;
-  padding: 35px 30px 30px 30px;
-  gap: 28px; /* Mayor espaciado */
+/* ESTILOS PARA SECCIÓN CREAR OFICIOS V2 - WIZARD */
+.wizard-container {
+  max-width: 750px; /* Ancho del wizard */
+  margin: 30px auto;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 50, 100, 0.15);
+  padding: 0;
+  overflow: hidden; /* Para que los bordes redondeados afecten al header */
+  display: flex;
+  flex-direction: column;
 }
 
-.form-title-oficio-v2 {
-  color: #0d2c4f; /* Azul más oscuro */
-  font-size: 1.3em; /* Más grande */
-  font-weight: 700;
-  letter-spacing: .3px;
-  margin-bottom: 10px;
-  text-align: center; /* Centrado */
-  border-bottom: 3px solid #ff8c00; /* Borde inferior naranja */
-  padding-bottom: 12px;
-  background: none; /* Sin gradiente */
-  box-shadow: none;
-}
-
-.paso-header-v2 {
-  color: #103a63;
-  font-size: 1.1em;
-  font-weight: 600;
-  margin-bottom: 14px;
-}
-.paso-numero-v2 {
-  background: #ff8c00; /* Naranja */
+.wizard-header {
+  background: #0d2c4f; /* Azul oscuro corporativo */
   color: #fff;
-  font-weight: bold;
-  font-size: 1.05em;
-  border-radius: 8px; /* Cuadrado redondeado */
-  width: 1.8em;
-  height: 1.8em;
-  box-shadow: 0 2px 7px #ff8c0040;
+  padding: 25px 35px;
+  text-align: center;
 }
+
+.wizard-title {
+  margin: 0 0 20px 0;
+  font-size: 1.6em;
+  font-weight: 600;
+}
+
+.wizard-steps {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.wizard-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #a0b8d1; /* Color para pasos no activos */
+  font-weight: 500;
+  transition: color 0.3s ease;
+  position: relative; /* Para el tooltip */
+}
+.wizard-step:hover .wizard-step-tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+
+.wizard-step.active {
+  color: #ffc107; /* Amarillo/Naranja para paso activo */
+  font-weight: 700;
+}
+
+.wizard-step-number {
+  width: 40px; /* Ligeramente más grande */
+  height: 40px;
+  border-radius: 50%;
+  background: transparent; /* Fondo transparente */
+  border: 2.5px solid #7b95b1; /* Borde más grueso y oscuro para inactivos */
+  color: #7b95b1; /* Color de número inactivo */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15em; /* Un poco más grande */
+  font-weight: 600;
+  margin-bottom: 10px; /* Más espacio */
+  transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.wizard-step.active .wizard-step-number {
+  background: #ffc107;
+  border-color: #ffc107;
+  color: #0d2c4f; /* Texto oscuro sobre fondo amarillo */
+}
+.wizard-step.completed .wizard-step-number { /* Estilo para pasos completados pero no activos */
+  background: #a0b8d1;
+  border-color: #a0b8d1;
+  color: #0d2c4f;
+}
+
+
+.wizard-step-label {
+  font-size: 0.95em; /* Un poco más grande */
+  text-align: center;
+  max-width: 80px; /* Para evitar que el texto sea muy ancho */
+}
+
+.wizard-step-connector {
+  flex-grow: 1; /* Para que ocupe el espacio disponible */
+  height: 3px; /* Más grueso */
+  background-color: #c5d3e0; /* Gris claro para inactivo */
+  margin: 0 -2px; /* Liger solapamiento para evitar gaps por redondeo */
+  transform: translateY(-25px); /* Alineado con el centro de los números */
+  transition: background-color 0.3s ease;
+  min-width: 30px;
+}
+.wizard-step.active ~ .wizard-step-connector { /* Conector se activa si el paso anterior está activo */
+   /* background-color: #ffc107; */ /* Esto se maneja mejor con JS */
+}
+.wizard-step.completed ~ .wizard-step-connector {
+    background-color: #a0b8d1; /* Conector completado */
+}
+.wizard-step.active .wizard-step-tooltip, .wizard-step.completed .wizard-step-tooltip {
+    /* Si se quiere un tooltip diferente para activos/completados */
+}
+
+.wizard-step-tooltip {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%; /* Posición del tooltip */
+    left: 50%;
+    margin-left: -60px; /* Usar la mitad del width para centrar */
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.wizard-step-tooltip::after { /* Flecha del tooltip */
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+
+.wizard-content {
+  padding: 30px 40px;
+  background: #f7fafd; /* Fondo muy claro para el contenido */
+}
+
+.wizard-step-content {
+  display: none; /* Ocultos por defecto */
+  animation: fadeInWizardStep 0.5s ease-out;
+}
+.wizard-step-content.active {
+  display: block;
+}
+
+@keyframes fadeInWizardStep {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.wizard-step-title {
+  font-size: 1.35em;
+  color: #0d2c4f;
+  margin-top: 0;
+  margin-bottom: 25px;
+  text-align: left;
+  border-bottom: 2px solid #e0e7ee;
+  padding-bottom: 10px;
+}
+
+/* Ajustes a los elementos de formulario existentes para V2 Wizard */
+.form-block-oficio-v2 { /* Ya no es el contenedor principal, pero podría usarse para agrupar campos si es necesario */
+  background: transparent; /* El fondo lo da .wizard-content */
+  border-radius: 0; /* Sin bordes propios si está dentro del wizard */
+  box-shadow: none; /* Sin sombra propia */
+  border: none; /* Sin borde propio */
+  max-width: 100%; /* Ocupa el ancho del paso del wizard */
+  margin: 0;
+  padding: 0; /* Sin padding propio */
+  gap: 20px; /* Espacio entre field-blocks */
+}
+
+/* .form-title-oficio-v2 no se usa directamente en el wizard, se usa .wizard-step-title */
+
+/* .paso-header-v2 y .paso-numero-v2 no se usan directamente, el wizard tiene su propio header */
 
 .input-grande-v2 {
   padding: 12px 15px; /* Más padding */
-  font-size: 1.1em;
-  border-radius: 10px;
-  border: 1.8px solid #a0b8d1;
-  background: #fdfdff; /* Blanco casi puro */
-  margin-bottom: 8px;
+  font-size: 1.05em; /* Ligeramente más pequeño para encajar mejor */
+  border-radius: 8px; /* Menos redondeado */
+  border: 1.5px solid #c5d3e0; /* Borde más sutil */
+  background: #fff;
+  margin-bottom: 10px; /* Espacio estándar */
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 .input-grande-v2:focus {
-  border: 2.2px solid #ff8c00; /* Borde naranja al enfocar */
+  border-color: #ff8c00;
   background: #fff;
+  box-shadow: 0 0 0 2px rgba(255, 140, 0, 0.2); /* Sombra de foco naranja */
 }
 
-.lista-formatos-v2 {
-  background: #fdfdff;
-  border-radius: 12px;
-  padding: 20px;
-  min-height: 80px;
-  margin-bottom: 12px;
-  box-shadow: inset 0 1px 5px #17406a1a; /* Sombra interior */
+.lista-formatos-v2.wizard-format-list { /* Aplicar a la lista de formatos dentro del wizard */
+  background: #fff;
+  border-radius: 8px;
+  padding: 10px; /* Menos padding */
+  min-height: 150px; /* Altura mínima para ver varios items */
+  margin-bottom: 20px; /* Espacio antes de la navegación */
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+  max-height: 350px;
+  overflow-y: auto;
+  border: 1px solid #d3dde6;
 }
 #seccion-crear-oficios-v2 #lista-formatos-v2 a {
-  color: #0d2c4f;
-  font-size: 1.08em;
-  padding: 6px 8px;
+  color: #205085; /* Azul más estándar */
+  font-size: 1.02em;
+  padding: 10px 12px;
   border-radius: 6px;
   transition: background 0.15s, color 0.15s;
+  border-bottom: 1px solid #e8eef3;
+  display: block;
+  text-decoration: none;
+  font-weight: 500;
+}
+#seccion-crear-oficios-v2 #lista-formatos-v2 a:last-child {
+  border-bottom: none;
 }
 #seccion-crear-oficios-v2 #lista-formatos-v2 a:hover {
-  background: #ffead1; /* Naranja claro al pasar el mouse */
-  color: #b35f00;
+  background: #e8f0f7; /* Azul muy claro al pasar el mouse */
+  color: #0d2c4f;
 }
 #seccion-crear-oficios-v2 #lista-formatos-v2 a.selected {
   background: #ff8c00;
   color: #fff;
-  font-weight: bold;
+  font-weight: 700; /* Más destacado */
+}
+.wizard-format-count {
+  font-size: 0.9em; /* Más pequeño */
+  color: #5a789b; /* Azul grisáceo */
+  margin: 0px 0 10px 2px; /* Ajuste de margen */
+  text-align: left;
 }
 
-
-.boton-oficio-v2 {
-  background: linear-gradient(90deg, #ff8c00 60%, #ffa500 100%); /* Naranja */
+/* Botones de acción principales (Crear, Siguiente, etc.) */
+.boton-oficio-v2, /* Reutilizamos la clase si es el botón final de creación */
+.wizard-navigation .boton-wizard-next,
+.wizard-create-button {
+  background: #ff8c00; /* Naranja principal */
   color: #fff;
-  border-radius: 10px;
-  padding: 14px 0;
-  font-size: 1.12em;
-  box-shadow: 0 3px 10px #ff8c0033;
+  border-radius: 8px;
+  padding: 12px 28px;
+  font-size: 1.08em;
+  font-weight: 600;
+  box-shadow: 0 2px 5px rgba(255, 140, 0, 0.25);
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
 }
-.boton-oficio-v2:hover {
-  background: linear-gradient(90deg, #ffa500 60%, #ff8c00 100%);
-  box-shadow: 0 5px 18px #ff8c0045;
-  transform: translateY(-2px) scale(1.02);
+.boton-oficio-v2:hover,
+.wizard-navigation .boton-wizard-next:hover,
+.wizard-create-button:hover {
+  background: #e67e00; /* Naranja más oscuro */
+  box-shadow: 0 4px 10px rgba(255, 140, 0, 0.3);
+  transform: translateY(-1px);
 }
-.boton-secundario-v2 {
-  background: #f0f4f8; /* Gris claro */
+
+/* Botones secundarios (Volver, Anterior) */
+.boton-secundario-v2, /* Si se usa fuera de la navegación del wizard */
+.wizard-navigation .boton-wizard-prev {
+  background: #e8f0f7;
   color: #0d2c4f;
-  border: 1.8px solid #a0b8d1;
-  border-radius: 10px;
-  padding: 12px 0;
-  font-size: 1.03em;
+  border: 1.5px solid #c5d3e0;
+  border-radius: 8px;
+  padding: 11px 25px; /* Ligeramente menos padding vertical */
+  font-size: 1.05em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
 }
-.boton-secundario-v2:hover {
+.boton-secundario-v2:hover,
+.wizard-navigation .boton-wizard-prev:hover {
   background: #dde6ed;
-  border-color: #0d2c4f;
+  border-color: #a0b8d1;
 }
-#seccion-crear-oficios-v2 .boton-v2 { /* Estilo para el botón de seleccionar subcaso */
-    background: #2a5a8c;
+
+/* Botón específico para "Seleccionar Subcaso" */
+#seccion-crear-oficios-v2 .boton-v2.wizard-select-button {
+    background: #2a5a8c; /* Azul medio */
     color: white;
     border-radius: 8px;
     padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    width: auto; /* No ocupa todo el ancho */
+    display: inline-block; /* Para que no ocupe toda la línea */
+    margin-bottom: 10px;
 }
-#seccion-crear-oficios-v2 .boton-v2:hover {
-    background: #1e4266;
+#seccion-crear-oficios-v2 .boton-v2.wizard-select-button:hover {
+    background: #1e4266; /* Azul más oscuro */
+}
+
+.wizard-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 35px; /* Más espacio arriba */
+  padding-top: 25px; /* Más padding */
+  border-top: 1px solid #d3dde6; /* Borde más visible */
+}
+/* Si solo hay un botón "Siguiente", centrarlo */
+.wizard-navigation > .boton-wizard-next:only-child {
+  margin-left: auto;
 }
 
 
-.form-tip-oficio-v2 {
-  background: #fff3e0; /* Naranja muy claro */
-  border-left: 5px solid #ffb74d; /* Naranja medio */
-  color: #8c5a00; /* Marrón anaranjado */
-  margin-top: 22px;
-  padding: 14px 20px;
-  border-radius: 10px;
-  font-size: 1.02em;
-  box-shadow: 0 2px 9px #ffb74d20;
-}
+/* .form-tip-oficio-v2 no se usa directamente en el wizard, se usa .wizard-note */
 
 #seccion-crear-oficios-v2 label {
   font-weight: 600;
-  color: #0d2c4f; /* Azul más oscuro */
+  color: #0d2c4f;
   margin-bottom: 6px;
   display: block;
-  font-size: 1.03em;
+  font-size: 1.02em; /* Ligeramente más pequeño */
 }
+
+.wizard-selected-subcase {
+  margin-top: 10px;
+  padding: 10px 12px;
+  background-color: #e0eaf3; /* Un poco más oscuro */
+  border: 1px solid #b8cce0;
+  border-radius: 6px;
+  font-weight: 500;
+  color: #0d2c4f;
+}
+.wizard-note {
+  font-size: 0.92em; /* Más pequeño */
+  color: #405a77;
+  background: #e8f0f7;
+  padding: 12px 15px;
+  border-radius: 6px;
+  margin-top: 15px;
+  border-left: 4px solid #a0b8d1; /* Borde más grueso */
+}
+
+.wizard-summary {
+  background: #f0f5fa; /* Fondo aún más claro */
+  padding: 20px 25px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+  border: 1px solid #d3dde6;
+}
+.wizard-summary h4 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #0d2c4f;
+  font-size: 1.2em; /* Más grande */
+  border-bottom: 1.5px solid #c8d3df;
+  padding-bottom: 10px;
+}
+.wizard-summary p {
+  margin: 0 0 10px 0; /* Más espacio entre párrafos */
+  font-size: 1.03em;
+  color: #2c3e50; /* Color de texto principal */
+}
+.wizard-summary p strong {
+  color: #103a63;
+}
+
 /* Fin de estilos para V2 */
 
     .datetime-bar {
@@ -1469,45 +1696,123 @@
     </div>
   </div>
 </div>
-<!-- SECCIÓN CREAR OFICIOS MEJORADA V2 -->
+<!-- SECCIÓN CREAR OFICIOS V2 - WIZARD STYLE -->
 <div id="seccion-crear-oficios-v2" style="display:none;">
-  <div class="form-block form-block-oficio-v2">
-    <div class="form-title form-title-oficio-v2">
-      Crear Oficios v2
+  <div class="wizard-container">
+    <div class="wizard-header">
+      <h2 class="wizard-title">Crear Nuevo Oficio</h2>
+      <div class="wizard-steps">
+        <div class="wizard-step active" data-step="1">
+          <div class="wizard-step-number">1</div>
+          <div class="wizard-step-label">Formato</div>
+          <span class="wizard-step-tooltip">Seleccionar el tipo de documento base.</span>
+        </div>
+        <div class="wizard-step-connector" data-step-connect="1"></div>
+        <div class="wizard-step" data-step="2">
+          <div class="wizard-step-number">2</div>
+          <div class="wizard-step-label">Destino</div>
+          <span class="wizard-step-tooltip">Elegir la ubicación del nuevo oficio.</span>
+        </div>
+        <div class="wizard-step-connector" data-step-connect="2"></div>
+        <div class="wizard-step" data-step="3">
+          <div class="wizard-step-number">3</div>
+          <div class="wizard-step-label">Nombre</div>
+          <span class="wizard-step-tooltip">Asignar un nombre al archivo.</span>
+        </div>
+        <div class="wizard-step-connector" data-step-connect="3"></div>
+        <div class="wizard-step" data-step="4">
+          <div class="wizard-step-number">4</div>
+          <div class="wizard-step-label">Confirmar</div>
+          <span class="wizard-step-tooltip">Revisar y crear el oficio.</span>
+        </div>
+      </div>
     </div>
-    <!-- Paso 1: Selección de formato -->
-    <div id="paso1-elegir-formato-v2">
-      <div style="text-align:left;">
-        <div class="paso-header paso-header-v2"><span class="paso-numero paso-numero-v2">1</span> Elija un formato</div>
+
+    <div class="wizard-content">
+      <!-- Paso 1: Selección de formato -->
+      <div class="wizard-step-content active" id="wizard-v2-step-1">
+        <h3 class="wizard-step-title">Paso 1: Elija un Formato</h3>
         <input id="filtro-formatos-v2" type="text" placeholder="Filtrar por nombre..." class="input-grande input-grande-v2" onkeyup="filtrarFormatosV2()">
-        <div style="color:#b00020;margin-bottom:7px;">Formatos detectados: <span id="cantidad-formatos-v2"></span></div>
-        <div id="lista-formatos-v2" class="lista-formatos lista-formatos-v2"></div>
+        <div class="wizard-format-count">Formatos detectados: <span id="cantidad-formatos-v2">0</span></div>
+        <div id="lista-formatos-v2" class="lista-formatos lista-formatos-v2 wizard-format-list">
+          <!-- La lista de formatos se renderizará aquí por JS -->
+        </div>
+        <div class="wizard-navigation">
+          <button class="boton boton-wizard-next" onclick="wizardV2IrAPaso(2)">Siguiente</button>
+        </div>
       </div>
-    </div>
-    <!-- Paso 2: Elegir destino y nombre -->
-    <div id="paso2-elegir-destino-v2" style="display:none;max-width:440px;margin:0 auto;">
-      <div class="paso-header paso-header-v2"><span class="paso-numero paso-numero-v2">2</span> Elija destino y nombre</div>
-      <div class="field-block">
-        <label><b>Año:</b></label>
-        <select id="select-anio-oficio-v2" onchange="llenarCasosOficioV2()" class="input-grande input-grande-v2"></select>
+
+      <!-- Paso 2: Elegir destino -->
+      <div class="wizard-step-content" id="wizard-v2-step-2">
+        <h3 class="wizard-step-title">Paso 2: Elija el Destino</h3>
+        <div class="field-block">
+          <label><b>Año:</b></label>
+          <select id="select-anio-oficio-v2" onchange="llenarCasosOficioV2()" class="input-grande input-grande-v2"></select>
+        </div>
+        <div class="field-block">
+          <label><b>Caso:</b></label>
+          <select id="select-caso-oficio-v2" onchange="llenarSubcasosOficioV2()" class="input-grande input-grande-v2"></select>
+        </div>
+        <div class="field-block">
+          <label><b>Subcaso (opcional):</b></label>
+          <button type="button" id="boton-subcaso-oficio-v2" class="boton boton-v2 wizard-select-button" onclick="abrirSelectorSubcasoOficioV2()">
+            Seleccionar Subcaso
+          </button>
+          <div id="subcaso-oficio-seleccionado-v2" class="wizard-selected-subcase"></div>
+        </div>
+        <div id="nota-sin-subcaso-v2" class="wizard-note">
+          <b>Nota:</b> si no seleccionas ningún subcaso, se almacenará en el caso <b id="nombre-caso-nota-oficio-v2"></b>.
+        </div>
+        <div class="wizard-navigation">
+          <button class="boton boton-wizard-prev" onclick="wizardV2IrAPaso(1)">Anterior</button>
+          <button class="boton boton-wizard-next" onclick="wizardV2IrAPaso(3)">Siguiente</button>
+        </div>
       </div>
-      <div class="field-block">
-        <label><b>Caso:</b></label>
-        <select id="select-caso-oficio-v2" onchange="llenarSubcasosOficioV2()" class="input-grande input-grande-v2"></select>
+
+      <!-- Paso 3: Nuevo nombre -->
+      <div class="wizard-step-content" id="wizard-v2-step-3">
+        <h3 class="wizard-step-title">Paso 3: Asigne un Nombre al Archivo</h3>
+        <div class="field-block">
+          <label for="nuevo-nombre-oficio-v2"><b>Nuevo nombre (sin extensión):</b></label>
+          <input id="nuevo-nombre-oficio-v2" type="text" placeholder="Ej: Petición Respuesta Importante" class="input-grande input-grande-v2">
+        </div>
+        <div class="wizard-navigation">
+          <button class="boton boton-wizard-prev" onclick="wizardV2IrAPaso(2)">Anterior</button>
+          <button class="boton boton-wizard-next" onclick="wizardV2IrAPaso(4)">Siguiente</button>
+        </div>
       </div>
-      <div class="field-block">
-        <label><b>Subcaso (opcional):</b></label>
-        <button type="button" id="boton-subcaso-oficio-v2" class="boton boton-v2" style="padding:10px 22px;font-size:1em;" onclick="abrirSelectorSubcasoOficioV2()">
-          Seleccionar
-        </button>
-<!-- Nota dinámica -->
-  <div id="nota-sin-subcaso-v2"
-     style="margin:10px 0 0 0; color:#17406a; background:#eaf0f7; border-radius:6px; padding:6px 12px; font-size:0.97em;">
-  <b>Nota:</b> si no seleccionas ningún subcaso, se almacenará en <b id="nombre-caso-nota-oficio-v2"></b>
-</div>
-        <div id="subcaso-oficio-seleccionado-v2" style="margin-top:7px;color:#17406a;font-weight:600;font-size:1em;"></div>
+
+      <!-- Paso 4: Confirmación y Creación -->
+      <div class="wizard-step-content" id="wizard-v2-step-4">
+        <h3 class="wizard-step-title">Paso 4: Confirmar y Crear</h3>
+        <div class="wizard-summary">
+          <h4>Resumen:</h4>
+          <p><strong>Formato Seleccionado:</strong> <span id="summary-formato-v2">-</span></p>
+          <p><strong>Año:</strong> <span id="summary-anio-v2">-</span></p>
+          <p><strong>Caso:</strong> <span id="summary-caso-v2">-</span></p>
+          <p><strong>Subcaso:</strong> <span id="summary-subcaso-v2">-</span></p>
+          <p><strong>Nombre del Archivo:</strong> <span id="summary-nombre-v2">-</span>.<span id="summary-extension-v2">ext</span></p>
+        </div>
+        <!-- Previsualización de cabecera (opcional, si se mantiene) -->
+        <div id="cabecera-oficio-preview-v2" style="display:none; margin:20px 0; padding:10px; border:1px dashed #ccc; background:#f9f9f9;">
+          <div class="oficio-cabecera oficio-cabecera-v2" id="cabecera-oficio-v2">
+            <div>
+              Señor,<br>
+              <b id="nombre-carpeta-oficio-v2-preview"></b><br>
+              <span id="correo-oficio-v2-preview" style="display:none;">Correo electrónico <span id="correo-valor-v2-preview"></span><br></span>
+              <span id="radicado-oficio-v2-preview" style="display:none;">RAD. PGN DOKUS <span id="radicado-valor-v2-preview"></span><br></span>
+            </div>
+          </div>
+        </div>
+        <div class="wizard-navigation">
+          <button class="boton boton-wizard-prev" onclick="wizardV2IrAPaso(3)">Anterior</button>
+          <button class="boton boton-oficio boton-oficio-v2 wizard-create-button" onclick="copiarYCrearOficioV2()">Crear Archivo</button>
+        </div>
       </div>
-      <div id="panel-lateral-selector-v2" style="position:fixed;top:0;right:-410px;width:360px;height:100vh;background:#fff;box-shadow:-2px 0 16px #17406a22;z-index:5000;transition:right 0.3s cubic-bezier(.7,.2,.3,1);display:flex;flex-direction:column;">
+    </div> <!-- Fin wizard-content -->
+
+    <!-- Panel lateral para selección de subcaso (se mantiene la lógica, pero puede necesitar ajustes de estilo si se superpone mal) -->
+    <div id="panel-lateral-selector-v2" style="position:fixed;top:0;right:-410px;width:360px;height:100vh;background:#fff;box-shadow:-2px 0 16px #17406a22;z-index:6000;transition:right 0.3s cubic-bezier(.7,.2,.3,1);display:flex;flex-direction:column;">
         <div style="padding:20px 18px 12px 18px;font-size:1.13em;color:#17406a;font-weight:700;border-bottom:1px solid #eaf0f7;display:flex;justify-content:space-between;align-items:center;">
           <span id="panel-lateral-titulo-v2">Selecciona un subcaso</span>
           <button id="cerrar-panel-selector-btn-v2" style="background:none;border:none;font-size:1.3em;color:#b00020;cursor:pointer;font-weight:bold;line-height:1;">×</button>
@@ -1516,33 +1821,9 @@
           <input id="buscador-panel-selector-v2" style="width:100%;padding:8px 12px;font-size:1em;border-radius:6px;border:1px solid #b7ccee;background:#f5f7fa;outline:none;box-sizing:border-box;" placeholder="Filtrar por nombre...">
         </div>
         <div id="lista-panel-selector-v2" style="flex:1;overflow-y:auto;padding:0 12px 14px 12px;display:flex;flex-direction:column;gap:10px;"></div>
-      </div>
-      <div class="field-block">
-        <label><b>Nuevo nombre (sin extensión):</b></label>
-        <input id="nuevo-nombre-oficio-v2" type="text" placeholder="Ejemplo: Petición Juan" class="input-grande input-grande-v2">
-      </div>
-      <button class="boton boton-oficio boton-oficio-v2" onclick="copiarYCrearOficioV2()">Crear archivo</button>
-      <button class="boton boton-secundario boton-secundario-v2" onclick="volverPaso1V2()">Volver</button>
     </div>
-    <!-- CABECERA OFICIO, SOLO PARA RESPUESTA A USUARIO Y VARIANTES -->
-    <div id="cabecera-oficio-preview-v2" style="display:none;margin:36px 0 12px 0;">
-      <div class="oficio-cabecera oficio-cabecera-v2" id="cabecera-oficio-v2" style="margin-bottom:24px;">
-        <div>
-          Señor,<br>
-          <b id="nombre-carpeta-oficio-v2"></b><br>
-          <span id="correo-oficio-v2" style="display:none;">Correo electrónico <span id="correo-valor-v2"></span><br></span>
-          <span id="radicado-oficio-v2" style="display:none;">RAD. PGN DOKUS <span id="radicado-valor-v2"></span><br></span>
-        </div>
-      </div>
-    </div>
-    <div class="form-tip form-tip-oficio form-tip-oficio-v2">
-      <b>¿Cómo funciona?</b><br>
-      1. Elija un formato de la lista.<br>
-      2. Seleccione el destino (año/caso/subcaso) y escriba el nombre.<br>
-      3. Pulse "Crear archivo".<br>
-      <span style="color:#17406a;">¡Organice sus documentos en segundos!</span>
-    </div>
-  </div>
+
+  </div> <!-- Fin wizard-container -->
 </div>
 
 <!-- SECCIÓN BUSCAR CASO (fragmento modificado) -->
@@ -1718,8 +1999,12 @@ function mostrarSeccion(seccion) {
   }
   // Si se selecciona "crear-oficios-v2", recarga los formatos y combos para la V2
   if (seccion === "crear-oficios-v2") {
-    cargarFormatosOficiosV2();
-    setTimeout(actualizarNotaCasoOficioV2, 100);
+    wizardV2IrAPaso(1); // Asegura que siempre inicie en el paso 1
+    cargarFormatosOficiosV2(); // Carga inicial de formatos
+    // No es necesario llenar años/casos aquí, se hace al ir al paso 2 si es necesario.
+    // La nota de caso se actualiza dinámicamente.
+    // Limpiar campos al entrar a la sección
+    limpiarCamposCrearOficioV2(false); // false para no recargar formatos de nuevo
   }
 }
   function mostrarCrearPaso(tipo) {
@@ -3240,19 +3525,150 @@ function renderizarListaFormatosV2() {
 
 function seleccionarFormatoV2(idx) {
   formatoSeleccionadoV2 = formatosFiltradosV2[idx];
-  document.getElementById("paso1-elegir-formato-v2").style.display = "none";
-  document.getElementById("paso2-elegir-destino-v2").style.display = "block";
-  llenarAniosOficioV2();
-  document.getElementById("nuevo-nombre-oficio-v2").value = "";
-  renderizarListaFormatosV2(); // Para que se actualice el resaltado
+  // No cambiamos de paso aquí directamente, solo actualizamos la UI del paso actual
+  renderizarListaFormatosV2(); // Para que se actualice el resaltado del formato seleccionado
+  // Opcional: podríamos poner un pequeño feedback visual de que se seleccionó.
 }
 
-function volverPaso1V2() {
-  document.getElementById("paso1-elegir-formato-v2").style.display = "block";
-  document.getElementById("paso2-elegir-destino-v2").style.display = "none";
-  formatoSeleccionadoV2 = null;
-  renderizarListaFormatosV2();
+function volverPaso1V2() { // Esta función ya no es necesaria en el flujo del wizard, se usa wizardV2IrAPaso()
+  wizardV2IrAPaso(1);
 }
+
+// Nueva función para controlar la navegación del Wizard V2
+var pasoActualWizardV2 = 1;
+
+function wizardV2IrAPaso(numeroPaso) {
+  // Validaciones antes de avanzar de paso
+  if (numeroPaso > pasoActualWizardV2) { // Solo valida al avanzar
+    if (pasoActualWizardV2 === 1 && !formatoSeleccionadoV2) {
+      alert("Por favor, seleccione un formato antes de continuar.");
+      return;
+    }
+    if (pasoActualWizardV2 === 2) {
+      if (!document.getElementById("select-anio-oficio-v2").value || !document.getElementById("select-caso-oficio-v2").value) {
+        alert("Por favor, seleccione año y caso antes de continuar.");
+        return;
+      }
+    }
+    if (pasoActualWizardV2 === 3 && !document.getElementById("nuevo-nombre-oficio-v2").value.trim()) {
+      alert("Por favor, ingrese un nombre para el archivo antes de continuar.");
+      return;
+    }
+  }
+
+  // Ocultar todos los contenidos de los pasos
+  var contenidos = document.querySelectorAll("#seccion-crear-oficios-v2 .wizard-step-content");
+  for (var i = 0; i < contenidos.length; i++) {
+    contenidos[i].classList.remove("active");
+  }
+
+  // Quitar clase 'active' de todos los indicadores de paso y conectores
+  var steps = document.querySelectorAll("#seccion-crear-oficios-v2 .wizard-step");
+  var connectors = document.querySelectorAll("#seccion-crear-oficios-v2 .wizard-step-connector");
+
+  steps.forEach(function(step) {
+    step.classList.remove('active');
+    step.classList.remove('completed');
+  });
+  connectors.forEach(function(connector) {
+    connector.classList.remove('active');
+  });
+
+  // Mostrar el contenido del paso actual y activar el indicador y los anteriores como completados
+  document.getElementById("wizard-v2-step-" + numeroPaso).classList.add("active");
+
+  for (var k = 1; k <= steps.length; k++) {
+    var currentStepIndicator = document.querySelector("#seccion-crear-oficios-v2 .wizard-step[data-step='" + k + "']");
+    var currentConnector = document.querySelector("#seccion-crear-oficios-v2 .wizard-step-connector[data-step-connect='" + (k - 1) + "']");
+
+    if (k < numeroPaso) { // Pasos anteriores como completados
+      if (currentStepIndicator) currentStepIndicator.classList.add("completed");
+      if (currentConnector) currentConnector.classList.add("active"); // Conector anterior al completado también activo
+    } else if (k === numeroPaso) { // Paso actual como activo
+      if (currentStepIndicator) currentStepIndicator.classList.add("active");
+      // El conector ANTERIOR al paso activo también debe estar activo si el paso anterior se completó.
+      var prevConnector = document.querySelector("#seccion-crear-oficios-v2 .wizard-step-connector[data-step-connect='" + (k - 1) + "']");
+      if (prevConnector) prevConnector.classList.add("active");
+    }
+  }
+
+  pasoActualWizardV2 = numeroPaso;
+
+  // Si estamos en el paso 4 (resumen), actualizar el resumen
+  if (numeroPaso === 4) {
+    actualizarResumenWizardV2();
+  }
+
+  // Llenar combos si se va al paso 2 y aún no se han llenado
+  if (numeroPaso === 2) {
+    if (document.getElementById("select-anio-oficio-v2").options.length === 0) {
+        llenarAniosOficioV2();
+    }
+  }
+}
+
+function actualizarResumenWizardV2() {
+  if (!formatoSeleccionadoV2) return; // No debería llegar aquí sin formato
+
+  document.getElementById("summary-formato-v2").textContent = formatoSeleccionadoV2.Nombre;
+  document.getElementById("summary-anio-v2").textContent = document.getElementById("select-anio-oficio-v2").value || "-";
+  document.getElementById("summary-caso-v2").textContent = document.getElementById("select-caso-oficio-v2").value || "-";
+  document.getElementById("summary-subcaso-v2").textContent = subcasoOficioSeleccionadoV2 || "(Ninguno)";
+
+  var nombreNuevo = document.getElementById("nuevo-nombre-oficio-v2").value.trim();
+  var extension = formatoSeleccionadoV2.Nombre.split('.').pop();
+  document.getElementById("summary-nombre-v2").textContent = nombreNuevo || "(Sin nombre)";
+  document.getElementById("summary-extension-v2").textContent = extension || "ext";
+
+  // Lógica para la previsualización de la cabecera (si se mantiene)
+  var anio = document.getElementById("select-anio-oficio-v2").value;
+  var caso = document.getElementById("select-caso-oficio-v2").value;
+  var subcasoNombre = subcasoOficioSeleccionadoV2;
+  var datosPreview = { nombre: subcasoNombre || caso, correo: "", radicado: "" };
+
+  // Intentar cargar datos del subcaso o caso para el preview
+  var rutaDatosJson = "";
+  if (subcasoNombre) {
+    rutaDatosJson = desktop + "\\Año " + anio + "\\" + caso + "\\" + subcasoNombre + "\\.datos_subcaso.json";
+  } else {
+    rutaDatosJson = desktop + "\\Año " + anio + "\\" + caso + "\\.datos_caso.json";
+  }
+
+  if (fso.FileExists(rutaDatosJson)) {
+      try {
+          var f = fso.OpenTextFile(rutaDatosJson, 1);
+          var json = f.ReadAll();
+          f.Close();
+          var datosJson = JSON.parse(json);
+          datosPreview.correo = datosJson.correo || "";
+          datosPreview.radicado = datosJson.radicado || "";
+      } catch (e) { /* Ignorar error si el JSON no es válido */ }
+  }
+
+  var previewDiv = document.getElementById("cabecera-oficio-preview-v2");
+  if (datosPreview.correo || datosPreview.radicado) {
+      document.getElementById("nombre-carpeta-oficio-v2-preview").innerText = datosPreview.nombre;
+      var correoSpan = document.getElementById("correo-oficio-v2-preview");
+      var radicadoSpan = document.getElementById("radicado-oficio-v2-preview");
+
+      if (datosPreview.correo) {
+          document.getElementById("correo-valor-v2-preview").innerText = datosPreview.correo;
+          correoSpan.style.display = "";
+      } else {
+          correoSpan.style.display = "none";
+      }
+      if (datosPreview.radicado) {
+          document.getElementById("radicado-valor-v2-preview").innerText = datosPreview.radicado;
+          radicadoSpan.style.display = "";
+      } else {
+          radicadoSpan.style.display = "none";
+      }
+      previewDiv.style.display = "block";
+  } else {
+      previewDiv.style.display = "none";
+  }
+}
+
 
 function llenarAniosOficioV2() {
   var select = document.getElementById("select-anio-oficio-v2");
@@ -3492,20 +3908,24 @@ function limpiarCamposCrearOficioV2() {
   var selectCaso = document.getElementById('select-caso-oficio-v2');
   var nuevoNombre = document.getElementById('nuevo-nombre-oficio-v2');
 
-  if (selectAnio) selectAnio.selectedIndex = 0; // O -1 si prefieres "Seleccione..."
-  if (selectCaso) selectCaso.innerHTML = ""; // Limpiar opciones de caso
+  if (selectAnio) selectAnio.selectedIndex = 0;
+  if (selectCaso) selectCaso.innerHTML = "";
   if (nuevoNombre) nuevoNombre.value = "";
 
-  mostrarSubcasoSeleccionadoV2(""); // Esto resetea la UI del subcaso
-  formatoSeleccionadoV2 = null; // Resetea el formato seleccionado
+  mostrarSubcasoSeleccionadoV2("");
+  formatoSeleccionadoV2 = null;
 
-  // Asegúrate de que el paso 1 sea visible y el paso 2 oculto
-  document.getElementById("paso1-elegir-formato-v2").style.display = "block";
-  document.getElementById("paso2-elegir-destino-v2").style.display = "none";
+  // No se cambian los display de los pasos aquí, eso lo maneja wizardV2IrAPaso()
+  // document.getElementById("paso1-elegir-formato-v2").style.display = "block"; // Incorrecto para wizard
+  // document.getElementById("paso2-elegir-destino-v2").style.display = "none"; // Incorrecto para wizard
 
-  // Recargar formatos y actualizar la nota
-  cargarFormatosOficiosV2();
+  if (recargarFormatos !== false) { // Permite no recargar formatos si se llama desde la inicialización de la sección
+    cargarFormatosOficiosV2();
+  }
+  renderizarListaFormatosV2(); // Para quitar la selección visual del formato
   actualizarNotaCasoOficioV2();
+  // Asegurarse que el wizard esté en el paso 1 visualmente si se llama desde fuera del flujo normal del wizard
+  // wizardV2IrAPaso(1); // Comentado porque limpiarCampos se usa también al finalizar con éxito.
 }
 
 
