@@ -140,110 +140,100 @@
 
 /* ESTILOS PARA SECCIÓN CREAR OFICIOS V2 - WIZARD */
 .wizard-container {
-  max-width: 750px; /* Ancho del wizard */
-  margin: 30px auto;
+  max-width: 750px;
+  margin: 15px auto; /* Reducido margen vertical */
   background: #fff;
   border-radius: 16px;
-  box-shadow: 0 8px 30px rgba(0, 50, 100, 0.15);
+  box-shadow: 0 6px 20px rgba(0, 40, 80, 0.12); /* Sombra más suave */
   padding: 0;
-  overflow: hidden; /* Para que los bordes redondeados afecten al header */
+  overflow: hidden;
   display: flex;
   flex-direction: column;
+  max-height: calc(100vh - 110px); /* (user-bar + datetime-bar + algunos márgenes) */
 }
 
 .wizard-header {
-  background: #17406a; /* Azul corporativo original, más claro que #0d2c4f */
+  background: #17406a;
   color: #fff;
-  padding: 25px 35px;
+  padding: 15px 25px; /* Padding reducido */
   text-align: center;
+  flex-shrink: 0; /* Evita que el header se encoja */
 }
-
 .wizard-title {
-  margin: 0 0 20px 0;
-  font-size: 1.6em;
+  margin: 0 0 10px 0; /* Reducido margen inferior */
+  font-size: 1.35em; /* Ligeramente más pequeño */
   font-weight: 600;
 }
-
 .wizard-steps {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 3px; /* Gap reducido */
 }
-
 .wizard-step {
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: #a0b8d1; /* Color para pasos no activos */
+  color: #a0b8d1;
   font-weight: 500;
   transition: color 0.3s ease;
-  position: relative; /* Para el tooltip */
+  position: relative;
 }
 .wizard-step:hover .wizard-step-tooltip {
   visibility: visible;
   opacity: 1;
 }
-
-
 .wizard-step.active {
-  color: #ffc107; /* Amarillo/Naranja para paso activo */
+  color: #ffc107;
   font-weight: 700;
 }
-
 .wizard-step-number {
-  width: 40px; /* Ligeramente más grande */
-  height: 40px;
+  width: 30px; /* Más pequeño */
+  height: 30px;
+  font-size: 0.95em;
+  margin-bottom: 4px; /* Margen reducido */
+  border-width: 2px;
   border-radius: 50%;
-  background: transparent; /* Fondo transparente */
-  border: 2.5px solid #7b95b1; /* Borde más grueso y oscuro para inactivos */
-  color: #7b95b1; /* Color de número inactivo */
+  background: transparent;
+  border-color: #7b95b1;
+  color: #7b95b1;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.15em; /* Un poco más grande */
   font-weight: 600;
-  margin-bottom: 10px; /* Más espacio */
   transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
-
 .wizard-step.active .wizard-step-number {
   background: #ffc107;
   border-color: #ffc107;
-  color: #0d2c4f; /* Texto oscuro sobre fondo amarillo */
+  color: #0d2c4f;
 }
-.wizard-step.completed .wizard-step-number { /* Estilo para pasos completados pero no activos */
+.wizard-step.completed .wizard-step-number {
   background: #a0b8d1;
   border-color: #a0b8d1;
   color: #0d2c4f;
 }
-
-
 .wizard-step-label {
-  font-size: 0.95em; /* Un poco más grande */
+  font-size: 0.75em; /* Más pequeño */
+  max-width: 55px;
+  line-height: 1.1;
   text-align: center;
-  max-width: 80px; /* Para evitar que el texto sea muy ancho */
 }
-
 .wizard-step-connector {
-  flex-grow: 1; /* Para que ocupe el espacio disponible */
-  height: 3px; /* Más grueso */
-  background-color: #c5d3e0; /* Gris claro para inactivo */
-  margin: 0 -2px; /* Liger solapamiento para evitar gaps por redondeo */
-  transform: translateY(-25px); /* Alineado con el centro de los números */
+  flex-grow: 1;
+  height: 2px; /* Más fino */
+  background-color: #c5d3e0;
+  margin: 0;
+  transform: translateY(-17px); /* Ajustar alineación */
   transition: background-color 0.3s ease;
-  min-width: 30px;
+  min-width: 15px; /* Reducido */
 }
-.wizard-step.active ~ .wizard-step-connector { /* Conector se activa si el paso anterior está activo */
-   /* background-color: #ffc107; */ /* Esto se maneja mejor con JS */
+.wizard-step.active ~ .wizard-step-connector {
+   /* background-color: #ffc107; */ /* JS maneja esto mejor */
 }
 .wizard-step.completed ~ .wizard-step-connector {
-    background-color: #a0b8d1; /* Conector completado */
+    background-color: #a0b8d1;
 }
-.wizard-step.active .wizard-step-tooltip, .wizard-step.completed .wizard-step-tooltip {
-    /* Si se quiere un tooltip diferente para activos/completados */
-}
-
 .wizard-step-tooltip {
     visibility: hidden;
     width: 120px;
@@ -253,15 +243,15 @@
     border-radius: 6px;
     padding: 5px 0;
     position: absolute;
-    z-index: 1;
-    bottom: 125%; /* Posición del tooltip */
+    z-index: 10; /* Asegurar que esté sobre otros elementos */
+    bottom: 105%; /* Ajustar posición */
     left: 50%;
-    margin-left: -60px; /* Usar la mitad del width para centrar */
+    margin-left: -60px;
     opacity: 0;
     transition: opacity 0.3s;
+    font-size: 0.85em;
 }
-
-.wizard-step-tooltip::after { /* Flecha del tooltip */
+.wizard-step-tooltip::after {
     content: "";
     position: absolute;
     top: 100%;
@@ -272,60 +262,53 @@
     border-color: #555 transparent transparent transparent;
 }
 
-
 .wizard-content {
-  padding: 20px 30px; /* Reducido el padding vertical y horizontal */
-  background: #f7fafd; /* Fondo muy claro para el contenido */
-  flex-grow: 1; /* Permite que el contenido crezca si hay espacio */
-  /* overflow-y: auto; */ /* Quitado para que el scroll lo maneje el contenedor principal si es necesario */
+  padding: 15px 25px 10px 25px;
+  background: #f7fafd;
+  flex-grow: 1;
+  overflow-y: auto; /* Permitir scroll SÓLO en el contenido si es necesario */
 }
 
 .wizard-step-content {
-  display: none; /* Ocultos por defecto */
-  animation: fadeInWizardStep 0.5s ease-out;
+  display: none;
+  animation: fadeInWizardStep 0.4s ease-out;
 }
 .wizard-step-content.active {
   display: block;
 }
-
 @keyframes fadeInWizardStep {
-  from { opacity: 0; transform: translateY(15px); }
+  from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 .wizard-step-title {
-  font-size: 1.35em;
+  font-size: 1.25em; /* Reducido */
   color: #0d2c4f;
   margin-top: 0;
-  margin-bottom: 25px;
+  margin-bottom: 15px; /* Reducido */
   text-align: left;
-  border-bottom: 2px solid #e0e7ee;
-  padding-bottom: 10px;
+  border-bottom: 1.5px solid #e0e7ee; /* Más sutil */
+  padding-bottom: 8px; /* Reducido */
 }
 
-/* Ajustes a los elementos de formulario existentes para V2 Wizard */
-.form-block-oficio-v2 { /* Ya no es el contenedor principal, pero podría usarse para agrupar campos si es necesario */
-  background: transparent; /* El fondo lo da .wizard-content */
-  border-radius: 0; /* Sin bordes propios si está dentro del wizard */
-  box-shadow: none; /* Sin sombra propia */
-  border: none; /* Sin borde propio */
-  max-width: 100%; /* Ocupa el ancho del paso del wizard */
+.form-block-oficio-v2 {
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  border: none;
+  max-width: 100%;
   margin: 0;
-  padding: 0; /* Sin padding propio */
-  gap: 20px; /* Espacio entre field-blocks */
+  padding: 0;
+  gap: 15px; /* Espacio reducido entre field-blocks */
 }
-
-/* .form-title-oficio-v2 no se usa directamente en el wizard, se usa .wizard-step-title */
-
-/* .paso-header-v2 y .paso-numero-v2 no se usan directamente, el wizard tiene su propio header */
 
 .input-grande-v2 {
-  padding: 12px 15px; /* Más padding */
-  font-size: 1.05em; /* Ligeramente más pequeño para encajar mejor */
-  border-radius: 8px; /* Menos redondeado */
-  border: 1.5px solid #c5d3e0; /* Borde más sutil */
+  padding: 10px 12px; /* Padding reducido */
+  font-size: 1em;
+  border-radius: 6px;
+  border: 1.5px solid #c5d3e0;
   background: #fff;
-  margin-bottom: 10px; /* Espacio estándar */
+  margin-bottom: 8px;
   width: 100%;
   box-sizing: border-box;
   transition: border-color 0.2s, box-shadow 0.2s;
@@ -333,25 +316,25 @@
 .input-grande-v2:focus {
   border-color: #ff8c00;
   background: #fff;
-  box-shadow: 0 0 0 2px rgba(255, 140, 0, 0.2); /* Sombra de foco naranja */
+  box-shadow: 0 0 0 2px rgba(255, 140, 0, 0.2);
 }
 
-.lista-formatos-v2.wizard-format-list { /* Aplicar a la lista de formatos dentro del wizard */
+.lista-formatos-v2.wizard-format-list {
   background: #fff;
-  border-radius: 8px;
-  padding: 10px; /* Menos padding */
-  min-height: 150px; /* Altura mínima para ver varios items */
-  margin-bottom: 20px; /* Espacio antes de la navegación */
-  box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
-  max-height: 280px;  /* Reducido para evitar scroll */
+  border-radius: 6px;
+  padding: 8px;
+  min-height: 100px; /* Reducido */
+  margin-bottom: 15px;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.04);
+  max-height: 220px;  /* Reducido significativamente */
   overflow-y: auto;
   border: 1px solid #d3dde6;
 }
 #seccion-crear-oficios-v2 #lista-formatos-v2 a {
-  color: #205085; /* Azul más estándar */
-  font-size: 1.02em;
-  padding: 10px 12px;
-  border-radius: 6px;
+  color: #205085;
+  font-size: 0.95em; /* Reducido */
+  padding: 8px 10px;
+  border-radius: 4px;
   transition: background 0.15s, color 0.15s;
   border-bottom: 1px solid #e8eef3;
   display: block;
@@ -362,32 +345,31 @@
   border-bottom: none;
 }
 #seccion-crear-oficios-v2 #lista-formatos-v2 a:hover {
-  background: #e8f0f7; /* Azul muy claro al pasar el mouse */
+  background: #e8f0f7;
   color: #0d2c4f;
 }
 #seccion-crear-oficios-v2 #lista-formatos-v2 a.selected {
   background: #ff8c00;
   color: #fff;
-  font-weight: 700; /* Más destacado */
+  font-weight: 600;
 }
 .wizard-format-count {
-  font-size: 0.9em; /* Más pequeño */
-  color: #5a789b; /* Azul grisáceo */
-  margin: 0px 0 10px 2px; /* Ajuste de margen */
+  font-size: 0.85em; /* Más pequeño */
+  color: #5a789b;
+  margin: -5px 0 8px 2px; /* Ajuste de margen */
   text-align: left;
 }
 
-/* Botones de acción principales (Crear, Siguiente, etc.) */
-.boton-oficio-v2, /* Reutilizamos la clase si es el botón final de creación */
+.boton-oficio-v2,
 .wizard-navigation .boton-wizard-next,
 .wizard-create-button {
-  background: #ff8c00; /* Naranja principal */
+  background: #ff8c00;
   color: #fff;
-  border-radius: 8px;
-  padding: 12px 28px;
-  font-size: 1.08em;
+  border-radius: 6px;
+  padding: 10px 22px; /* Padding ajustado */
+  font-size: 1em; /* Reducido */
   font-weight: 600;
-  box-shadow: 0 2px 5px rgba(255, 140, 0, 0.25);
+  box-shadow: 0 2px 4px rgba(255, 140, 0, 0.2);
   border: none;
   cursor: pointer;
   transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
@@ -395,20 +377,19 @@
 .boton-oficio-v2:hover,
 .wizard-navigation .boton-wizard-next:hover,
 .wizard-create-button:hover {
-  background: #e67e00; /* Naranja más oscuro */
-  box-shadow: 0 4px 10px rgba(255, 140, 0, 0.3);
+  background: #e67e00;
+  box-shadow: 0 3px 8px rgba(255, 140, 0, 0.25);
   transform: translateY(-1px);
 }
 
-/* Botones secundarios (Volver, Anterior) */
-.boton-secundario-v2, /* Si se usa fuera de la navegación del wizard */
+.boton-secundario-v2,
 .wizard-navigation .boton-wizard-prev {
   background: #e8f0f7;
   color: #0d2c4f;
   border: 1.5px solid #c5d3e0;
-  border-radius: 8px;
-  padding: 11px 25px; /* Ligeramente menos padding vertical */
-  font-size: 1.05em;
+  border-radius: 6px;
+  padding: 9px 20px; /* Padding ajustado */
+  font-size: 0.95em; /* Reducido */
   font-weight: 500;
   cursor: pointer;
   transition: background 0.2s, border-color 0.2s;
@@ -419,89 +400,86 @@
   border-color: #a0b8d1;
 }
 
-/* Botón específico para "Seleccionar Subcaso" */
 #seccion-crear-oficios-v2 .boton-v2.wizard-select-button {
-    background: #2a5a8c; /* Azul medio */
+    background: #2a5a8c;
     color: white;
-    border-radius: 8px;
-    padding: 10px 20px;
+    border-radius: 6px;
+    padding: 8px 18px; /* Reducido */
     border: none;
     cursor: pointer;
     font-weight: 500;
-    width: auto; /* No ocupa todo el ancho */
-    display: inline-block; /* Para que no ocupe toda la línea */
-    margin-bottom: 10px;
+    font-size: 0.95em; /* Reducido */
+    width: auto;
+    display: inline-block;
+    margin-bottom: 8px;
 }
 #seccion-crear-oficios-v2 .boton-v2.wizard-select-button:hover {
-    background: #1e4266; /* Azul más oscuro */
+    background: #1e4266;
 }
 
 .wizard-navigation {
   display: flex;
   justify-content: space-between;
-  margin-top: 35px; /* Más espacio arriba */
-  padding-top: 25px; /* Más padding */
-  border-top: 1px solid #d3dde6; /* Borde más visible */
+  margin-top: 20px; /* Reducido */
+  padding-top: 15px; /* Reducido */
+  border-top: 1px solid #d3dde6;
+  flex-shrink: 0; /* Evita que la navegación se encoja */
 }
-/* Si solo hay un botón "Siguiente", centrarlo */
 .wizard-navigation > .boton-wizard-next:only-child {
   margin-left: auto;
 }
 
-
-/* .form-tip-oficio-v2 no se usa directamente en el wizard, se usa .wizard-note */
-
 #seccion-crear-oficios-v2 label {
   font-weight: 600;
   color: #0d2c4f;
-  margin-bottom: 6px;
+  margin-bottom: 5px; /* Reducido */
   display: block;
-  font-size: 1.02em; /* Ligeramente más pequeño */
+  font-size: 0.95em;
 }
 
 .wizard-selected-subcase {
-  margin-top: 10px;
-  padding: 10px 12px;
-  background-color: #e0eaf3; /* Un poco más oscuro */
+  margin-top: 8px; /* Reducido */
+  padding: 8px 10px; /* Reducido */
+  background-color: #e0eaf3;
   border: 1px solid #b8cce0;
-  border-radius: 6px;
+  border-radius: 4px; /* Menos redondeado */
   font-weight: 500;
   color: #0d2c4f;
+  font-size: 0.95em;
 }
 .wizard-note {
-  font-size: 0.92em; /* Más pequeño */
+  font-size: 0.9em;
   color: #405a77;
   background: #e8f0f7;
-  padding: 12px 15px;
-  border-radius: 6px;
-  margin-top: 15px;
-  border-left: 4px solid #a0b8d1; /* Borde más grueso */
+  padding: 10px 12px; /* Reducido */
+  border-radius: 4px;
+  margin-top: 10px; /* Reducido */
+  border-left: 3px solid #a0b8d1;
 }
 
 .wizard-summary {
-  background: #f0f5fa; /* Fondo aún más claro */
-  padding: 20px 25px;
-  border-radius: 8px;
-  margin-bottom: 25px;
+  background: #f0f5fa;
+  padding: 15px 20px; /* Reducido */
+  border-radius: 6px;
+  margin-bottom: 20px; /* Reducido */
   border: 1px solid #d3dde6;
 }
 .wizard-summary h4 {
   margin-top: 0;
-  margin-bottom: 15px;
+  margin-bottom: 12px; /* Reducido */
   color: #0d2c4f;
-  font-size: 1.2em; /* Más grande */
-  border-bottom: 1.5px solid #c8d3df;
-  padding-bottom: 10px;
+  font-size: 1.1em; /* Reducido */
+  border-bottom: 1px solid #c8d3df;
+  padding-bottom: 6px; /* Reducido */
 }
 .wizard-summary p {
-  margin: 0 0 10px 0; /* Más espacio entre párrafos */
-  font-size: 1.03em;
-  color: #2c3e50; /* Color de texto principal */
+  margin: 0 0 8px 0;
+  font-size: 0.95em; /* Reducido */
+  color: #2c3e50;
 }
 .wizard-summary p strong {
   color: #103a63;
 }
-
 /* Fin de estilos para V2 */
 
     .datetime-bar {
@@ -1891,6 +1869,14 @@
 function pad2(num) {
   return (num < 10 ? '0' : '') + num;
 }
+
+// Función auxiliar: tipo oración (definida globalmente)
+function toSentenceCase(str) {
+  if (!str) return "";
+  str = String(str).toLowerCase(); // Asegurar que str es un string
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
   // Variables de sistema
   var fso = new ActiveXObject("Scripting.FileSystemObject");
   var shell = new ActiveXObject("WScript.Shell");
@@ -1950,10 +1936,15 @@ var extensionesWord = /\.(docx?|pdf)$/i;
 
 
   //VARIABLES PAGINACIÓN PANEL LATERAL
-// --- PAGINACIÓN PANEL LATERAL SUBCASOS ---
-var paginaActualPanelSubcasos = 1;
-var subcasosPanelFiltrados = [];
-var subcasosPanelPorPagina = 8;
+// --- PAGINACIÓN PANEL LATERAL SUBCASOS (V1 - Original) ---
+var paginaActualPanelSubcasos = 1; // Esta variable podría ser reutilizada o renombrada si V1 también necesita paginación.
+var subcasosPanelFiltrados = []; // Para V1
+var subcasosPanelPorPagina = 8; // Para V1
+
+// --- PAGINACIÓN PANEL LATERAL SUBCASOS V2 ---
+var subcasosPanelListaCompletaV2 = []; // Guarda todos los subcasos cargados para el panel V2
+var paginaActualPanelSubcasosV2 = 1;
+var subcasosPanelPorPaginaV2 = 7; // Mostrar 7 elementos por página
 
   // Sección y menú
 function mostrarSeccion(seccion) {
@@ -2996,11 +2987,12 @@ var _callbackSeleccionUniversalV2 = null;
 var _elementosPanelActualesV2 = [];
 
 function abrirPanelSelectorV2(elementos, titulo, callback) {
-  _elementosPanelActualesV2 = elementos.slice();
+  subcasosPanelListaCompletaV2 = elementos.slice(); // Guardar la lista completa para filtrar y paginar
   _callbackSeleccionUniversalV2 = callback;
   document.getElementById('buscador-panel-selector-v2').value = '';
   document.getElementById('panel-lateral-titulo-v2').innerText = titulo || 'Selecciona un elemento';
-  mostrarElementosEnPanelSelectorV2('');
+  paginaActualPanelSubcasosV2 = 1; // Resetear a la primera página
+  renderizarPanelSubcasosPaginadoV2(); // Usar la nueva función de renderizado con paginación
   mostrarPanelLateralSelectorV2(true);
   setTimeout(function(){document.getElementById('buscador-panel-selector-v2').focus();}, 100);
 }
@@ -3027,42 +3019,75 @@ document.getElementById('cerrar-panel-selector-btn-v2').onclick = function(){
 // El event listener de Escape ya es genérico y cierra ambos paneles.
 
 document.getElementById('buscador-panel-selector-v2').oninput = function() {
-  mostrarElementosEnPanelSelectorV2(this.value);
+  paginaActualPanelSubcasosV2 = 1; // Resetear a la primera página al filtrar
+  renderizarPanelSubcasosPaginadoV2();
 };
 
-function mostrarElementosEnPanelSelectorV2(filtro) {
-  var lista = document.getElementById('lista-panel-selector-v2');
-  lista.innerHTML = '';
-  filtro = filtro.toLowerCase();
-  var hay = false;
-  for (var i = 0; i < _elementosPanelActualesV2.length; i++) {
-    var el = _elementosPanelActualesV2[i];
-    if (filtro && el.nombre.toLowerCase().indexOf(filtro) === -1) continue;
-    hay = true;
+function renderizarPanelSubcasosPaginadoV2() {
+  var filtro = document.getElementById('buscador-panel-selector-v2').value.toLowerCase();
+  var elementosFiltrados = subcasosPanelListaCompletaV2.filter(function(item) {
+    return item.nombre.toLowerCase().indexOf(filtro) !== -1;
+  });
+
+  var listaDiv = document.getElementById('lista-panel-selector-v2');
+  listaDiv.innerHTML = ''; // Limpiar lista anterior
+
+  if (elementosFiltrados.length === 0) {
+    var vacio = document.createElement('div');
+    vacio.style.color = "#aaa";
+    vacio.style.padding = "16px 8px";
+    vacio.style.textAlign = "center";
+    vacio.innerHTML = "No hay subcasos que coincidan.";
+    listaDiv.appendChild(vacio);
+    return;
+  }
+
+  var totalPaginas = Math.ceil(elementosFiltrados.length / subcasosPanelPorPaginaV2);
+  if (paginaActualPanelSubcasosV2 > totalPaginas) paginaActualPanelSubcasosV2 = totalPaginas;
+  if (paginaActualPanelSubcasosV2 < 1) paginaActualPanelSubcasosV2 = 1;
+
+  var inicio = (paginaActualPanelSubcasosV2 - 1) * subcasosPanelPorPaginaV2;
+  var fin = inicio + subcasosPanelPorPaginaV2;
+  var elementosPagina = elementosFiltrados.slice(inicio, fin);
+
+  for (var i = 0; i < elementosPagina.length; i++) {
+    var el = elementosPagina[i];
     var div = document.createElement('div');
-    div.className = 'tarjeta-panel-selector'; // Reutiliza la clase si el estilo es el mismo
-    // Aplicar estilos en línea si son necesarios o usar una clase específica para V2 si el estilo del item cambia
+    div.className = 'tarjeta-panel-selector';
     div.innerHTML =
       '<div style="font-weight:600;color:#17406a;margin-bottom:3px;pointer-events:none;white-space:normal;word-break:normal;overflow-wrap:break-word;line-height:1.5;max-width:99%;">' +
         el.nombre +
       '</div>' +
       '<div style="font-size:.96em;color:#285080;pointer-events:none;line-height:1.5;">Words almacenados: ' + el.cantidadWords + '</div>';
-    div.onmousedown = (function(nombre){
+    div.onmousedown = (function(itemNombre){ // Usar itemNombre para evitar problemas de scope en el closure
       return function(e) {
         e.preventDefault();
-        seleccionarElementoDesdePanelV2(encodeURIComponent(nombre));
+        seleccionarElementoDesdePanelV2(itemNombre); // Pasar el nombre directamente
       };
-    })(el.nombre);
-    lista.appendChild(div);
+    })(el.nombre); // Pasar el nombre del elemento actual
+    listaDiv.appendChild(div);
   }
-  if (!hay) {
-    var vacio = document.createElement('div');
-    vacio.style.color = "#aaa";
-    vacio.style.padding = "16px 8px";
-    vacio.innerHTML = "No hay elementos que coincidan";
-    lista.appendChild(vacio);
+
+  // Renderizar controles de paginación
+  if (totalPaginas > 1) {
+    var paginadorHTML = '<div style="text-align:center; margin-top:10px; padding-bottom:5px;">';
+    if (paginaActualPanelSubcasosV2 > 1) {
+      paginadorHTML += '<button class="boton-pequeno" style="margin-right:5px;" onclick="cambiarPaginaPanelSubcasosV2(' + (paginaActualPanelSubcasosV2 - 1) + ')">&lt; Ant</button>';
+    }
+    paginadorHTML += '<span style="font-size:0.9em; color:#333; margin:0 5px;">Pág ' + paginaActualPanelSubcasosV2 + ' de ' + totalPaginas + '</span>';
+    if (paginaActualPanelSubcasosV2 < totalPaginas) {
+      paginadorHTML += '<button class="boton-pequeno" style="margin-left:5px;" onclick="cambiarPaginaPanelSubcasosV2(' + (paginaActualPanelSubcasosV2 + 1) + ')">Sig &gt;</button>';
+    }
+    paginadorHTML += '</div>';
+    listaDiv.innerHTML += paginadorHTML;
   }
 }
+
+function cambiarPaginaPanelSubcasosV2(nuevaPagina) {
+  paginaActualPanelSubcasosV2 = nuevaPagina;
+  renderizarPanelSubcasosPaginadoV2();
+}
+
 
 function seleccionarElementoDesdePanelV2(nombre) {
   var nombreDec = decodeURIComponent(nombre);
@@ -3996,7 +4021,7 @@ function copiarYCrearOficioV2() {
   }
 }
 
-function limpiarCamposCrearOficioV2() {
+function limpiarCamposCrearOficioV2(recargarFormatos) {
   var selectAnio = document.getElementById('select-anio-oficio-v2');
   var selectCaso = document.getElementById('select-caso-oficio-v2');
   var nuevoNombre = document.getElementById('nuevo-nombre-oficio-v2');
@@ -4677,3 +4702,5 @@ function inicializarCalendario() {
 </script>
 </body>
 </html>
+
+[end of newseccion]
