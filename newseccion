@@ -993,6 +993,413 @@
 .boton:hover {
   background: #205085;
 }
+
+/* === Estilos para el Nuevo Wizard V2 Minimalista Moderno === */
+
+/* Contenedor Principal del Wizard */
+.wizard-container {
+  background-color: #FFFFFF;
+  border: 1px solid #E0E0E0; 
+  padding: 15px 25px; /* AÚN MÁS Reducido padding vertical */
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05); /* Sombra más sutil */
+  border-radius: 6px; 
+}
+
+/* Título General del Wizard (Reutilizando .form-title-oficio pero con ajustes si es necesario) */
+#seccion-crear-oficios-v2 .form-title-oficio {
+  font-size: 1.3em; /* Reducido */
+  font-weight: 600;
+  color: #333333;
+  text-align: center; 
+  margin-bottom: 20px; /* Reducido */
+  border-left: none; 
+  background: none; 
+  padding-left: 0;
+  box-shadow: none;
+}
+
+/* Indicador de Progreso - Estilo "Dots & Line" */
+.wizard-progress-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 25px; /* Reducido */
+  padding: 0 10px; 
+}
+
+.progress-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative; 
+  flex-grow: 1; 
+}
+.progress-node:first-child { flex-grow: 0.15; } 
+.progress-node:last-child { flex-grow: 0.15; }
+
+
+.progress-dot {
+  width: 12px; /* Reducido */
+  height: 12px; /* Reducido */
+  background-color: #CED4DA; 
+  border-radius: 50%;
+  margin-bottom: 6px; /* Reducido */
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  border: 2px solid #CED4DA; 
+}
+
+.progress-label {
+  font-size: 0.85em; /* Reducido */
+  color: #757575; 
+  font-weight: 500;
+  transition: color 0.3s ease, font-weight 0.3s ease;
+}
+
+.progress-line {
+  height: 2px; /* Reducido */
+  background-color: #DEE2E6; 
+  flex-grow: 1; 
+  margin: 0 -1px; 
+  align-self: center; 
+  position: relative;
+  top: -10px; /* Ajustado para nueva altura de dot y label */
+  transition: background-color 0.3s ease;
+}
+
+/* Estados del Indicador de Progreso */
+.progress-node.active .progress-dot {
+  background-color: #17406A; 
+  border-color: #17406A;
+  transform: scale(1.15); /* Reducido scale */
+}
+.progress-node.active .progress-label {
+  color: #17406A;
+  font-weight: 600; /* Ligeramente menos fuerte */
+}
+
+.progress-node.completed .progress-dot {
+  background-color: #28A745; 
+  border-color: #28A745;
+}
+.progress-node.completed .progress-label {
+  color: #28A745;
+}
+.progress-node.completed + .progress-line { 
+  background-color: #28A745; 
+}
+
+
+/* Contenido del Paso */
+.wizard-step-content {
+  background-color: #FFFFFF; 
+  padding: 15px 8px; /* AÚN MÁS Reducido padding vertical */
+  border-radius: 6px; /* Menos redondeado */
+  margin-bottom: 15px; /* Reducido */
+}
+
+.wizard-step-title {
+  font-size: 1.1em; /* Reducido */
+  font-weight: 600;
+  color: #333333;
+  margin-top: 0;
+  margin-bottom: 15px; /* Reducido */
+  padding-bottom: 6px; /* Reducido */
+  border-bottom: 1px solid #E0E0E0; 
+}
+
+/* Campos de Formulario (Inputs, Selects) */
+#seccion-crear-oficios-v2 .input-grande,
+#seccion-crear-oficios-v2 select.input-grande {
+  font-size: 0.9em; /* Reducido */
+  padding: 7px 10px; /* Reducido padding */
+  border: 1px solid #CED4DA;
+  border-radius: 4px; 
+  background-color: #FFFFFF;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  width: 100%; 
+  box-sizing: border-box;
+  margin-bottom: 0; /* Quitar margen inferior directo del input si field-block lo maneja */
+}
+#seccion-crear-oficios-v2 .input-grande:focus,
+#seccion-crear-oficios-v2 select.input-grande:focus {
+  border-color: #17406A;
+  box-shadow: 0 0 0 2px rgba(23, 64, 106, 0.1); 
+  outline: none;
+}
+#seccion-crear-oficios-v2 .field-label { 
+  font-weight: 500;
+  color: #495057;
+  margin-bottom: 4px; /* Reducido */
+  font-size: 0.9em; /* Reducido */
+}
+#seccion-crear-oficios-v2 .field-block {
+    margin-bottom: 10px; /* Reducido */
+    gap: 3px; /* Reducido gap si es flex */
+}
+
+
+/* Lista de Formatos */
+#lista-formatos-v2 {
+  border: 1px solid #DEE2E6;
+  border-radius: 5px;
+  padding: 6px; 
+  max-height: 130px; /* AÚN MÁS Reducido max-height */
+  overflow-y: auto;
+}
+#lista-formatos-v2 a {
+  display: block;
+  padding: 6px 8px; 
+  color: #334d6e;
+  text-decoration: none;
+  border-radius: 3px; 
+  margin-bottom: 3px; 
+  transition: background-color 0.2s ease, color 0.2s ease;
+  font-size: 0.9em; 
+}
+#lista-formatos-v2 a:hover {
+  background-color: #EAF0F7; 
+  color: #17406A;
+}
+#lista-formatos-v2 a[style*="font-weight:bold"], 
+#lista-formatos-v2 a.selected-format { 
+  background-color: #D6E4F0; 
+  color: #17406A;
+  font-weight: bold;
+}
+
+/* Nota sin subcaso */
+#nota-sin-subcaso-v2 {
+    margin: 6px 0 0 0 !important; 
+    padding: 4px 8px !important; 
+    font-size: 0.88em !important; 
+}
+#subcaso-oficio-seleccionado-v2 {
+    margin-top: 5px !important; 
+    font-size: 0.9em !important; 
+}
+#subcaso-oficio-seleccionado-v2 .boton-pequeno { /* Ajustar botón cambiar de subcaso */
+    padding: 3px 10px !important;
+    font-size: 0.85em !important;
+    margin-left: 10px !important;
+}
+
+
+/* Botones de Navegación */
+.wizard-navigation-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px; 
+  margin-top: 20px; 
+  padding-top: 12px; 
+  border-top: 1px solid #E0E0E0;
+}
+
+.wizard-navigation-buttons .boton { 
+  padding: 7px 18px; 
+  font-size: 0.9em; 
+  font-weight: 500;
+  border-radius: 4px; 
+  border: 1px solid transparent; 
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+}
+.wizard-navigation-buttons .boton:hover {
+  transform: translateY(-1px);
+}
+
+.wizard-navigation-buttons .boton-oficio { 
+  background-color: #17406A;
+  color: #FFFFFF;
+  border-color: #17406A;
+}
+.wizard-navigation-buttons .boton-oficio:hover {
+  background-color: #205085; 
+  border-color: #205085;
+  box-shadow: 0 1px 4px rgba(23, 64, 106, 0.15); 
+}
+
+.wizard-navigation-buttons .boton-secundario {
+  background-color: #FFFFFF;
+  color: #495057; 
+  border-color: #CED4DA; 
+}
+.wizard-navigation-buttons .boton-secundario:hover {
+  background-color: #F8F9FA; 
+  border-color: #B0B8C0; 
+  color: #17406A; 
+}
+
+.wizard-navigation-buttons button.boton-secundario[onclick*="wizardIrPaso1"],
+.wizard-navigation-buttons button.boton-secundario[onclick*="wizardIrPaso2"] {
+  margin-right: auto; 
+}
+
+/* Resumen en el Paso 3 */
+.wizard-summary {
+  background: #F8F9FA;
+  border: 1px solid #E0E0E0;
+  border-radius: 5px; 
+  padding: 12px 15px; 
+  margin-bottom: 15px; 
+  font-size: 0.9em; 
+  color: #333333;
+}
+.wizard-summary h4 {
+  margin-top: 0;
+  margin-bottom: 10px; 
+  color: #17406A;
+  font-size: 1em; 
+  font-weight: 600;
+  padding-bottom: 6px; 
+  border-bottom: 1px dotted #CED4DA;
+}
+.wizard-summary p {
+  margin: 0 0 6px 0; 
+  line-height: 1.45; 
+}
+.wizard-summary p strong {
+  color: #333333; 
+  font-weight: 600;
+}
+
+/* Ajustes para la cabecera de vista previa del oficio */
+#cabecera-oficio-preview-v2 {
+    border: 1px dashed #b7ccee;
+    border-radius: 5px;
+    padding: 10px; 
+    margin: 15px 0; 
+    background-color: #fafdff;
+}
+#cabecera-oficio-preview-v2 h4 {
+    margin-top: 0;
+    margin-bottom: 6px; 
+    color: #17406A;
+    font-size: 0.95em; 
+    font-weight: 600;
+}
+/* Ajuste general para el form-tip */
+#seccion-crear-oficios-v2 .form-tip-oficio {
+    margin-top: 15px !important; 
+    padding: 8px 12px !important; 
+    font-size: 0.85em !important; 
+    line-height: 1.4;
+}
+
+/* Estilos para el Nuevo Panel Selector de Subcasos V2 */
+#panel-subcasos-wizard-v2 {
+  display: none; /* Inicialmente oculto, JS lo mostrará como flex */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.6); /* Overlay más oscuro */
+  z-index: 6000;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.panel-subcasos-v2-content { /* Contenedor interno del panel */
+  background-color: #FFFFFF;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  width: 450px; /* Ancho un poco mayor */
+  max-width: 95%;
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh; /* Para evitar que sea más alto que la ventana */
+}
+
+.panel-subcasos-v2-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.panel-subcasos-v2-header h3 {
+  margin: 0;
+  font-size: 1.3em;
+  color: #17406A;
+  font-weight: 600;
+}
+
+#btn-cerrar-panel-subcasos-v2 {
+  background: none;
+  border: none;
+  font-size: 1.8em; /* Más grande para mejor clic */
+  color: #777;
+  cursor: pointer;
+  padding: 0 5px;
+  line-height: 1;
+}
+#btn-cerrar-panel-subcasos-v2:hover {
+  color: #333;
+}
+
+#input-filtro-subcasos-v2 {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 15px;
+  border: 1px solid #CED4DA;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-size: 1em;
+}
+#input-filtro-subcasos-v2:focus {
+  border-color: #17406A;
+  box-shadow: 0 0 0 2px rgba(23, 64, 106, 0.1);
+  outline: none;
+}
+
+#lista-subcasos-wizard-v2 {
+  max-height: 300px; /* Más altura para la lista */
+  overflow-y: auto;
+  border: 1px solid #E0E0E0;
+  border-radius: 6px;
+  padding: 8px;
+}
+
+#lista-subcasos-wizard-v2 .subcaso-item-v2 {
+  padding: 10px 12px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #f9f9f9;
+  border: 1px solid #f0f0f0;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  font-size: 0.95em;
+  color: #333;
+}
+
+#lista-subcasos-wizard-v2 .subcaso-item-v2:hover {
+  background-color: #EAF0F7;
+  border-color: #D6E4F0;
+  color: #17406A;
+}
+
+#lista-subcasos-wizard-v2 .subcaso-item-v2 strong { /* Para el nombre del subcaso */
+    font-weight: 600;
+}
+#lista-subcasos-wizard-v2 .subcaso-item-v2 span { /* Para la cantidad de words */
+    font-size: 0.9em;
+    color: #555;
+    margin-left: 8px;
+}
+
+/* Para cuando no hay subcasos */
+#lista-subcasos-wizard-v2 .no-subcasos-v2 {
+    padding: 15px;
+    text-align: center;
+    color: #777;
+    font-style: italic;
+}
+
+
 .boton-pequeno {
   font-size: 0.92em !important;
   padding: 5px 17px !important;
@@ -1047,7 +1454,7 @@
     <div class="title">Gestor de Casos</div>
     <button onclick="mostrarSeccion('inicio')" id="btn-inicio" class="active">Inicio</button>
     <button onclick="mostrarSeccion('crear-caso')" id="btn-crear-caso">Crear año/caso/subcaso</button>
-<button onclick="mostrarSeccion('crear-oficios')" id="btn-crear-oficios">Crear oficios</button>
+<button onclick="mostrarSeccion('crear-oficios-v2')" id="btn-crear-oficios-v2">Crear oficios</button>
     <button onclick="mostrarSeccion('buscar-caso')" id="btn-buscar-caso">Buscar caso</button>
     <button onclick="mostrarSeccion('calendario')" id="btn-calendario">Calendario</button>
     <div class="spacer"></div>
@@ -1254,82 +1661,129 @@
           style="position:absolute;top:4px;right:8px;background:none;border:none;font-size:1.3em;cursor:pointer;color:#b88b06;">×</button>
   <div id="widget-recordatorios-contenido"></div>
 </div>
-<!--SECCIÓN DE CREAR OFICIOS -->
-<!-- SECCIÓN CREAR OFICIOS MEJORADA -->
-<div id="seccion-crear-oficios" style="display:none;">
-  <div class="form-block form-block-oficio">
-    <div class="form-title form-title-oficio">
-      Crear Oficios
+<!-- SECCIÓN CREAR OFICIOS V2 (WIZARD) -->
+<div id="seccion-crear-oficios-v2" style="display:none;">
+  <div class="form-block form-block-oficio wizard-container">
+    <div class="form-title form-title-oficio" style="margin-bottom: 20px;">
+      Crear Nuevo Oficio (Paso a Paso)
     </div>
-    <!-- Paso 1: Selección de formato -->
-    <div id="paso1-elegir-formato">
-      <div style="text-align:left;">
-        <div class="paso-header"><span class="paso-numero">1</span> Elija un formato</div>
-        <input id="filtro-formatos" type="text" placeholder="Filtrar por nombre..." class="input-grande" onkeyup="filtrarFormatos()">
-        <div style="color:#b00020;margin-bottom:7px;">Formatos detectados: <span id="cantidad-formatos"></span></div>
-        <div id="lista-formatos" class="lista-formatos"></div>
+
+    <!-- Indicador de Progreso del Wizard - Estilo "Dots & Line" -->
+    <div id="wizard-progress-indicator" class="wizard-progress-dots">
+      <div class="progress-node" id="progress-node-1">
+        <div class="progress-dot"></div>
+        <div class="progress-label">Formato</div>
+      </div>
+      <div class="progress-line"></div>
+      <div class="progress-node" id="progress-node-2">
+        <div class="progress-dot"></div>
+        <div class="progress-label">Detalles</div>
+      </div>
+      <div class="progress-line"></div>
+      <div class="progress-node" id="progress-node-3">
+        <div class="progress-dot"></div>
+        <div class="progress-label">Nombre</div>
+      </div>
+      <div class="progress-line"></div>
+      <div class="progress-node" id="progress-node-4">
+        <div class="progress-dot"></div>
+        <div class="progress-label">Confirmar</div>
       </div>
     </div>
-    <!-- Paso 2: Elegir destino y nombre -->
-    <div id="paso2-elegir-destino" style="display:none;max-width:440px;margin:0 auto;">
-      <div class="paso-header"><span class="paso-numero">2</span> Elija destino y nombre</div>
-      <div class="field-block">
-        <label><b>Año:</b></label>
-        <select id="select-anio-oficio" onchange="llenarCasosOficio()" class="input-grande"></select>
-      </div>
-      <div class="field-block">
-        <label><b>Caso:</b></label>
-        <select id="select-caso-oficio" onchange="llenarSubcasosOficio()" class="input-grande"></select>
-      </div>
-      <div class="field-block">
-        <label><b>Subcaso (opcional):</b></label>
-        <button type="button" id="boton-subcaso-oficio" class="boton" style="padding:10px 22px;font-size:1em;" onclick="abrirSelectorSubcasoOficio()">
-          Seleccionar
-        </button>
-<!-- Nota dinámica -->
-  <div id="nota-sin-subcaso"
-     style="margin:10px 0 0 0; color:#17406a; background:#eaf0f7; border-radius:6px; padding:6px 12px; font-size:0.97em;">
-  <b>Nota:</b> si no seleccionas ningún subcaso, se almacenará en <b id="nombre-caso-nota-oficio"></b>
-</div>
-        <div id="subcaso-oficio-seleccionado" style="margin-top:7px;color:#17406a;font-weight:600;font-size:1em;"></div>
-      </div>
-      <div id="panel-lateral-selector" style="position:fixed;top:0;right:-410px;width:360px;height:100vh;background:#fff;box-shadow:-2px 0 16px #17406a22;z-index:5000;transition:right 0.3s cubic-bezier(.7,.2,.3,1);display:flex;flex-direction:column;">
-        <div style="padding:20px 18px 12px 18px;font-size:1.13em;color:#17406a;font-weight:700;border-bottom:1px solid #eaf0f7;display:flex;justify-content:space-between;align-items:center;">
-          <span id="panel-lateral-titulo">Selecciona un subcaso</span>
-          <button id="cerrar-panel-selector-btn" style="background:none;border:none;font-size:1.3em;color:#b00020;cursor:pointer;font-weight:bold;line-height:1;">×</button>
+
+    <!-- Contenedor para los pasos del wizard -->
+    <div class="wizard-content">
+      <!-- Paso 1 del Wizard: Selección de formato -->
+      <div id="wizard-paso1-formato" class="wizard-step-content">
+        <h3 class="wizard-step-title">Paso 1: Seleccione el Formato del Oficio</h3>
+        <div style="text-align:left;">
+          <input id="filtro-formatos-v2" type="text" placeholder="Filtrar por nombre..." class="input-grande" onkeyup="filtrarFormatosV2()">
+          <div style="color:#b00020;margin-bottom:7px; margin-top:10px;">Formatos detectados: <span id="cantidad-formatos-v2"></span></div>
+          <div id="lista-formatos-v2" class="lista-formatos" style="max-height: 200px; overflow-y: auto; border: 1px solid #d0d4da; padding:10px; border-radius:8px;"></div>
         </div>
-        <div style="padding:13px 18px 7px 18px;">
-          <input id="buscador-panel-selector" style="width:100%;padding:8px 12px;font-size:1em;border-radius:6px;border:1px solid #b7ccee;background:#f5f7fa;outline:none;box-sizing:border-box;" placeholder="Filtrar por nombre...">
-        </div>
-        <div id="lista-panel-selector" style="flex:1;overflow-y:auto;padding:0 12px 14px 12px;display:flex;flex-direction:column;gap:10px;"></div>
-      </div>
-      <div class="field-block">
-        <label><b>Nuevo nombre (sin extensión):</b></label>
-        <input id="nuevo-nombre-oficio" type="text" placeholder="Ejemplo: Petición Juan" class="input-grande">
-      </div>
-      <button class="boton boton-oficio" onclick="copiarYCrearOficio()">Crear archivo</button>
-      <button class="boton boton-secundario" onclick="volverPaso1()">Volver</button>
-    </div>
-    <!-- CABECERA OFICIO, SOLO PARA RESPUESTA A USUARIO Y VARIANTES -->
-    <div id="cabecera-oficio-preview" style="display:none;margin:36px 0 12px 0;">
-      <div class="oficio-cabecera" id="cabecera-oficio" style="margin-bottom:24px;">
-        <div>
-          Señor,<br>
-          <b id="nombre-carpeta-oficio"></b><br>
-          <span id="correo-oficio" style="display:none;">Correo electrónico <span id="correo-valor"></span><br></span>
-          <span id="radicado-oficio" style="display:none;">RAD. PGN DOKUS <span id="radicado-valor"></span><br></span>
+        <div class="wizard-navigation-buttons">
+          <button class="boton boton-secundario" onclick="cancelarWizardOficioV2()">Cancelar</button>
+          <button class="boton boton-oficio" onclick="wizardIrPaso2()">Siguiente</button>
         </div>
       </div>
-    </div>
-    <div class="form-tip form-tip-oficio">
-      <b>¿Cómo funciona?</b><br>
-      1. Elija un formato de la lista.<br>
-      2. Seleccione el destino (año/caso/subcaso) y escriba el nombre.<br>
-      3. Pulse "Crear archivo".<br>
-      <span style="color:#17406a;">¡Organice sus documentos en segundos!</span>
+
+      <!-- Paso 2 del Wizard: Elegir destino -->
+      <div id="wizard-paso2-destino" class="wizard-step-content" style="display:none;">
+        <h3 class="wizard-step-title">Paso 2: Complete los Detalles del Destino</h3>
+        <div class="field-block">
+          <label><b>Año:</b></label>
+          <select id="select-anio-oficio-v2" onchange="llenarCasosOficioV2()" class="input-grande"></select>
+        </div>
+        <div class="field-block">
+          <label><b>Caso:</b></label>
+          <select id="select-caso-oficio-v2" onchange="llenarSubcasosOficioV2()" class="input-grande"></select>
+        </div>
+        <div class="field-block">
+          <label><b>Subcaso (opcional):</b></label>
+          <button type="button" id="boton-subcaso-oficio-v2" class="boton" style="padding:10px 22px;font-size:1em;" onclick="abrirPanelSubcasosWizardV2()">
+            Seleccionar Subcaso
+          </button>
+          <div id="nota-sin-subcaso-v2" style="margin:10px 0 0 0; color:#17406a; background:#eaf0f7; border-radius:6px; padding:6px 12px; font-size:0.97em;">
+            <b>Nota:</b> si no seleccionas ningún subcaso, se almacenará en <b id="nombre-caso-nota-oficio-v2"></b>
+          </div>
+          <div id="subcaso-oficio-seleccionado-v2" style="margin-top:7px;color:#17406a;font-weight:600;font-size:1em;"></div>
+        </div>
+        <div class="wizard-navigation-buttons">
+          <button class="boton boton-secundario" onclick="wizardIrPaso1()">Anterior</button>
+          <button class="boton boton-secundario" onclick="cancelarWizardOficioV2()">Cancelar</button>
+          <button class="boton boton-oficio" onclick="wizardIrPaso3()">Siguiente</button>
+        </div>
+      </div>
+      
+      <!-- Paso 3 del Wizard: Asignar Nombre -->
+      <div id="wizard-paso3-nombre" class="wizard-step-content" style="display:none;">
+        <h3 class="wizard-step-title">Paso 3: Asigne un Nombre al Archivo</h3>
+        <div class="field-block">
+          <label><b>Nuevo nombre (sin extensión):</b></label>
+          <input id="nuevo-nombre-oficio-v2" type="text" placeholder="Ejemplo: Petición Respuesta Urgente" class="input-grande">
+        </div>
+        <div class="wizard-navigation-buttons">
+          <button class="boton boton-secundario" onclick="wizardIrPaso2()">Anterior</button>
+          <button class="boton boton-secundario" onclick="cancelarWizardOficioV2()">Cancelar</button>
+          <button class="boton boton-oficio" onclick="wizardIrPaso4()">Siguiente</button>
+        </div>
+      </div>
+
+      <!-- Paso 4 del Wizard: Vista previa y creación -->
+      <div id="wizard-paso4-confirmar" class="wizard-step-content" style="display:none;">
+        <h3 class="wizard-step-title">Paso 4: Revise y Cree el Oficio</h3>
+        <div id="resumen-seleccion-v2" class="wizard-summary">
+          <!-- El resumen se llenará con JavaScript -->
+        </div>
+        <div id="cabecera-oficio-preview-v2" style="display:none;margin:20px 0 12px 0; padding: 10px; border: 1px dashed #b7ccee; border-radius: 8px;">
+          <h4 style="margin-top:0; color:#17406a;">Vista Previa de Cabecera (si aplica):</h4>
+          <div class="oficio-cabecera" id="cabecera-oficio-v2" style="margin-bottom:15px;">
+            <div>
+              Señor,<br>
+              <b id="nombre-carpeta-oficio-v2"></b><br>
+              <span id="correo-oficio-v2" style="display:none;">Correo electrónico <span id="correo-valor-v2"></span><br></span>
+              <span id="radicado-oficio-v2" style="display:none;">RAD. PGN DOKUS <span id="radicado-valor-v2"></span><br></span>
+            </div>
+          </div>
+        </div>
+        <div class="wizard-navigation-buttons">
+          <button class="boton boton-secundario" onclick="wizardIrPaso3()">Anterior</button>
+          <button class="boton boton-secundario" onclick="cancelarWizardOficioV2()">Cancelar</button>
+          <button class="boton boton-oficio" onclick="copiarYCrearOficioV2()">Crear Archivo</button>
+        </div>
+      </div>
+    </div> <!-- Fin wizard-content -->
+
+    <div class="form-tip form-tip-oficio" style="margin-top: 25px;">
+      Siga los pasos para crear su documento de forma guiada.<br>
+      1. Elija un formato.<br>
+      2. Seleccione el destino y escriba el nombre.<br>
+      3. Confirme y cree el archivo.<br>
+      <span style="color:#17406a;">¡Gestión de documentos simplificada!</span>
     </div>
   </div>
 </div>
+
 <!-- SECCIÓN BUSCAR CASO (fragmento modificado) -->
 <div id="seccion-buscar-caso" style="display:none;">
   <div class="form-block" style="max-width: 950px; width: 92vw; margin: 28px auto 0 auto;">
@@ -1393,11 +1847,155 @@
 function pad2(num) {
   return (num < 10 ? '0' : '') + num;
 }
+
+// Definición global de toSentenceCase
+function toSentenceCase(str) {
+  if (str === null || str === undefined || str === "") return "";
+  str = String(str).toLowerCase();
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
   // Variables de sistema
   var fso = new ActiveXObject("Scripting.FileSystemObject");
   var shell = new ActiveXObject("WScript.Shell");
   var desktop = shell.SpecialFolders("Desktop");
   var nombreUsuario = "Jhonatan";
+
+// Variables globales para el nuevo panel de subcasos V2
+var _subcasosCompletosPanelV2 = []; // Almacenará la lista completa de subcasos para filtrar
+var _callbackSubcasoSeleccionadoV2 = null; // Callback a ejecutar tras seleccionar un subcaso
+
+// === Funciones para el Nuevo Panel Selector de Subcasos (Wizard V2) ===
+
+function abrirPanelSubcasosWizardV2() {
+  var anioElement = document.getElementById('select-anio-oficio-v2');
+  var casoElement = document.getElementById('select-caso-oficio-v2');
+  var panelSubcasos = document.getElementById('panel-subcasos-wizard-v2');
+
+  if (!panelSubcasos) {
+    alert("Error: No se encontró el elemento del panel de subcasos.");
+    return;
+  }
+  if (!anioElement || !casoElement) {
+    alert("Error interno: No se encontraron los elementos de selección de año o caso.");
+    return;
+  }
+
+  var anio = anioElement.value;
+  var caso = casoElement.value;
+
+  if (!anio || anio === "") {
+    alert("Por favor, seleccione un AÑO antes de buscar subcasos.");
+    return;
+  }
+  if (!caso || caso === "") {
+    alert("Por favor, seleccione un CASO antes de buscar subcasos.");
+    return;
+  }
+  
+  var ruta = desktop + "\\Año " + anio + "\\" + caso;
+  _subcasosCompletosPanelV2 = []; // Limpiar antes de llenar
+
+  try {
+    if (!fso) {
+        alert("Error crítico: FileSystemObject no está disponible.");
+        return;
+    }
+    if (fso.FolderExists(ruta)) {
+      var carpetaCasoObj = fso.GetFolder(ruta);
+      var subEnum = new Enumerator(carpetaCasoObj.SubFolders);
+      for (; !subEnum.atEnd(); subEnum.moveNext()) {
+        var nombreSubcaso = subEnum.item().Name;
+        var cantWords = 0; // La lógica de contar words se puede omitir para simplificar el panel nuevo
+                           // o añadirla si se considera necesaria. Por ahora, 0.
+        _subcasosCompletosPanelV2.push({ nombre: nombreSubcaso, cantidadWords: cantWords });
+      }
+    } else {
+      alert("La carpeta para el caso '" + caso + "' del año " + anio + " no fue encontrada.\nRuta: " + ruta);
+      // No necesariamente retornar, podríamos mostrar el panel vacío o con un mensaje.
+      // Por ahora, si no existe la carpeta, no se cargan subcasos.
+    }
+  } catch (e) {
+    alert("Error al acceder a las carpetas para subcasos: " + e.message + "\nRuta: " + ruta);
+    // No necesariamente retornar, podríamos mostrar el panel vacío o con un mensaje.
+  }
+
+  document.getElementById('input-filtro-subcasos-v2').value = ""; // Limpiar filtro
+  renderizarSubcasosPanelV2(_subcasosCompletosPanelV2, ""); // Renderizar con todos los subcasos
+
+  // Asignar el callback que actualizará el Wizard V2
+  _callbackSubcasoSeleccionadoV2 = function(nombreSubcaso) {
+    subcasoOficioSeleccionadoV2 = nombreSubcaso; // Variable global del Wizard V2
+    mostrarSubcasoSeleccionadoV2(nombreSubcaso); // Función del Wizard V2 para mostrar la selección
+  };
+  
+  panelSubcasos.style.display = "flex"; // Mostrar el panel (CSS lo centra)
+  document.getElementById('input-filtro-subcasos-v2').focus();
+}
+
+function cerrarPanelSubcasosWizardV2() {
+  var panelSubcasos = document.getElementById('panel-subcasos-wizard-v2');
+  if (panelSubcasos) {
+    panelSubcasos.style.display = "none";
+  }
+  _callbackSubcasoSeleccionadoV2 = null; // Limpiar callback
+}
+
+function renderizarSubcasosPanelV2(subcasosArray, filtro) {
+  var listaDiv = document.getElementById('lista-subcasos-wizard-v2');
+  if (!listaDiv) return;
+  listaDiv.innerHTML = ""; // Limpiar lista
+
+  var filtroLowerCase = filtro ? filtro.trim().toLowerCase() : "";
+  var hayResultados = false;
+
+  for (var i = 0; i < subcasosArray.length; i++) {
+    var subcaso = subcasosArray[i];
+    if (filtroLowerCase && subcaso.nombre.toLowerCase().indexOf(filtroLowerCase) === -1) {
+      continue; // Saltar si no coincide con el filtro
+    }
+    hayResultados = true;
+    var itemDiv = document.createElement('div');
+    itemDiv.className = 'subcaso-item-v2';
+    // itemDiv.textContent = subcaso.nombre; // Versión simple
+    itemDiv.innerHTML = "<strong>" + subcaso.nombre + "</strong>" 
+                       // + "<span>(" + subcaso.cantidadWords + " Words)</span>"; // Opcional: mostrar conteo
+    
+    itemDiv.onclick = (function(nombre) {
+      return function() {
+        seleccionarSubcasoDesdePanelV2(nombre);
+      };
+    })(subcaso.nombre);
+    listaDiv.appendChild(itemDiv);
+  }
+
+  if (!hayResultados) {
+    var noResultDiv = document.createElement('div');
+    noResultDiv.className = 'no-subcasos-v2'; // Para aplicar estilos si no hay resultados
+    noResultDiv.textContent = filtroLowerCase ? "Ningún subcaso coincide con el filtro." : "No hay subcasos disponibles para este caso.";
+    listaDiv.appendChild(noResultDiv);
+  }
+}
+
+function filtrarSubcasosPanelV2() {
+  var filtro = document.getElementById('input-filtro-subcasos-v2').value;
+  renderizarSubcasosPanelV2(_subcasosCompletosPanelV2, filtro);
+}
+
+function seleccionarSubcasoDesdePanelV2(nombreSubcaso) {
+  if (_callbackSubcasoSeleccionadoV2) {
+    _callbackSubcasoSeleccionadoV2(nombreSubcaso);
+  }
+  cerrarPanelSubcasosWizardV2();
+}
+
+// Vinculación de eventos para el nuevo panel
+// Es mejor hacerlo después de que el DOM esté cargado, idealmente en una función de inicialización general.
+// Por ahora, lo colocaré aquí, asumiendo que el script se ejecuta después del HTML del panel.
+// window.onload o similar sería más robusto, pero en HTA a veces esto es directo.
+
+// === FIN Funciones para el Nuevo Panel Selector de Subcasos (Wizard V2) ===
+
   var rolUsuario = "Administrador";
 
  //Paginaciones en "Buscar"
@@ -1441,7 +2039,6 @@ var extensionesWord = /\.(docx?|pdf)$/i;
 
 
 
-
   //VARIABLES PAGINACIÓN PANEL LATERAL
 // --- PAGINACIÓN PANEL LATERAL SUBCASOS ---
 var paginaActualPanelSubcasos = 1;
@@ -1454,10 +2051,10 @@ function mostrarSeccion(seccion) {
   var secciones = [
     "seccion-inicio",
     "seccion-crear-caso",
-    "seccion-crear-oficios",
+    "seccion-crear-oficios-v2", // Nueva sección
     "seccion-buscar-caso",
     "seccion-busqueda-avanzada",
-    "seccion-calendario" // <-- NUEVO: agrega el calendario
+    "seccion-calendario"
   ];
   // Oculta todas las secciones
   for (var i = 0; i < secciones.length; i++) {
@@ -1469,9 +2066,10 @@ function mostrarSeccion(seccion) {
     "btn-inicio",
     "btn-crear-caso",
     "btn-crear-oficios",
+    "btn-crear-oficios-v2", // Nuevo botón
     "btn-buscar-caso",
     "btn-busqueda-avanzada",
-    "btn-calendario" // <-- NUEVO: agrega el botón del calendario
+    "btn-calendario"
   ];
   // Quita 'active' de todos los botones
   for (var i = 0; i < botones.length; i++) {
@@ -1489,6 +2087,21 @@ function mostrarSeccion(seccion) {
   if (seccion === "crear-oficios") {
     cargarFormatosOficios();
     setTimeout(actualizarNotaCasoOficio, 100);
+  } else if (seccion === "crear-oficios-v2") {
+    // Inicializar el wizard V2 mostrando el primer paso
+    // Esto también se encargará de llamar a cargarFormatosOficiosV2()
+    pasoActualWizardV2 = 1; // Asegurar que el estado del wizard esté reseteado
+    formatoSeleccionadoV2 = null; // Limpiar selección previa
+    subcasoOficioSeleccionadoV2 = ""; // Limpiar selección previa
+    document.getElementById("filtro-formatos-v2").value = ""; // Limpiar filtro
+    // Limpiar otros campos relevantes del wizard si es necesario al cambiar de sección
+    document.getElementById("select-anio-oficio-v2").innerHTML = "";
+    document.getElementById("select-caso-oficio-v2").innerHTML = "";
+    document.getElementById("subcaso-oficio-seleccionado-v2").innerHTML = "";
+    document.getElementById('boton-subcaso-oficio-v2').style.display = "";
+    document.getElementById("nuevo-nombre-oficio-v2").value = "";
+
+    mostrarPasoWizardV2(1);
   }
 }
   function mostrarCrearPaso(tipo) {
@@ -1713,6 +2326,610 @@ function abrirWord(rutaArchivo) {
     alert("El archivo no existe.");
   }
 }
+
+// FUNCIONES PARA EL WIZARD DE CREAR OFICIOS V2
+var formatoSeleccionadoV2 = null;
+var subcasoOficioSeleccionadoV2 = "";
+var pasoActualWizardV2 = 1; // Variable global para rastrear el paso actual
+
+function actualizarIndicadorProgresoWizardV2(pasoActual) {
+  for (var i = 1; i <= 4; i++) { 
+    var nodeElement = document.getElementById('progress-node-' + i);
+    if (nodeElement) {
+      // Primero, limpiar ambos estados explícitamente
+      nodeElement.classList.remove('active');
+      nodeElement.classList.remove('completed');
+
+      // Luego, aplicar el estado correcto
+      if (i < pasoActual) {
+        nodeElement.classList.add('completed');
+      } else if (i === pasoActual) {
+        nodeElement.classList.add('active');
+      }
+      // Los nodos donde i > pasoActual permanecerán sin 'active' ni 'completed'
+    }
+  }
+}
+
+function mostrarPasoWizardV2(pasoAMostrar) {
+  pasoActualWizardV2 = pasoAMostrar; 
+
+  document.getElementById('wizard-paso1-formato').style.display = (pasoAMostrar === 1) ? 'block' : 'none';
+  document.getElementById('wizard-paso2-destino').style.display = (pasoAMostrar === 2) ? 'block' : 'none';
+  document.getElementById('wizard-paso3-nombre').style.display = (pasoAMostrar === 3) ? 'block' : 'none'; // Nuevo paso
+  document.getElementById('wizard-paso4-confirmar').style.display = (pasoAMostrar === 4) ? 'block' : 'none'; // Confirmar es ahora paso 4
+
+  actualizarIndicadorProgresoWizardV2(pasoAMostrar);
+
+  if (pasoAMostrar === 1) {
+    cargarFormatosOficiosV2();
+  } else if (pasoAMostrar === 2) {
+    if (document.getElementById("select-anio-oficio-v2").options.length <= 1) {
+        llenarAniosOficioV2();
+    }
+    actualizarNotaCasoOficioV2();
+  } else if (pasoAMostrar === 3) {
+    // No hay acción específica al cargar el paso de nombre, más que mostrarlo.
+    // El foco podría ponerse en el input de nombre si se desea.
+    document.getElementById("nuevo-nombre-oficio-v2").focus();
+  } else if (pasoAMostrar === 4) { // Confirmar es ahora paso 4
+    generarResumenSeleccionV2();
+  }
+}
+
+function wizardIrPaso1() {
+  mostrarPasoWizardV2(1);
+}
+
+function wizardIrPaso2() {
+  if (pasoActualWizardV2 === 1 && !formatoSeleccionadoV2) {
+    alert("Por favor, seleccione un formato antes de continuar.");
+    return;
+  }
+  mostrarPasoWizardV2(2);
+}
+
+function wizardIrPaso3() {
+  // Validaciones del paso 2 (Detalles del Destino) antes de ir al paso 3 (Nombre)
+  var anio = document.getElementById("select-anio-oficio-v2").value;
+  var caso = document.getElementById("select-caso-oficio-v2").value;
+  // Subcaso es opcional, no necesita validación aquí para avanzar
+  
+  if (!anio || anio === "" || !caso || caso === "") {
+    alert("Por favor, complete los campos de Año y Caso antes de continuar.");
+    return;
+  }
+  mostrarPasoWizardV2(3);
+}
+
+function wizardIrPaso4() {
+  // Validaciones del paso 3 (Nombre) antes de ir al paso 4 (Confirmar)
+  var nombreNuevo = document.getElementById("nuevo-nombre-oficio-v2").value.trim();
+  if (!nombreNuevo) {
+    alert("Por favor, ingrese un nombre para el archivo.");
+    document.getElementById("nuevo-nombre-oficio-v2").focus();
+    return;
+  }
+  if (/[\\\/:*?"<>|]/.test(nombreNuevo)) {
+    alert("El nuevo nombre contiene caracteres no permitidos.");
+    document.getElementById("nuevo-nombre-oficio-v2").focus();
+    return;
+  }
+  mostrarPasoWizardV2(4);
+}
+
+
+// Ya no se necesita esta redeclaración, está al inicio.
+// var pasoActualWizardV2 = 1; 
+
+function cancelarWizardOficioV2() {
+  formatoSeleccionadoV2 = null;
+  subcasoOficioSeleccionadoV2 = "";
+  document.getElementById("filtro-formatos-v2").value = "";
+  document.getElementById("select-anio-oficio-v2").innerHTML = "";
+  document.getElementById("select-caso-oficio-v2").innerHTML = "";
+  document.getElementById("subcaso-oficio-seleccionado-v2").innerHTML = "";
+  document.getElementById("nuevo-nombre-oficio-v2").value = "";
+  document.getElementById('boton-subcaso-oficio-v2').style.display = "";
+
+
+  // Asegurarse que el panel lateral esté cerrado si se estaba usando
+  mostrarPanelLateralSelector(false);
+
+  pasoActualWizardV2 = 1;
+  mostrarPasoWizardV2(1); // Volver al primer paso y actualizar indicador
+}
+
+function cargarFormatosOficiosV2() {
+  // Similar a cargarFormatosOficios, pero para V2
+  // (Reutilizar lógica si es posible, ajustando IDs)
+  paginaFormatosV2 = 1; // Asumiendo que tendrás paginación separada
+  // formatoSeleccionadoV2 ya se maneja globalmente para el wizard
+  document.getElementById("filtro-formatos-v2").value = document.getElementById("filtro-formatos-v2").value || ""; // Mantener filtro si ya existe
+  formatosDetectadosV2 = []; // Asumiendo variables separadas
+  formatosFiltradosV2 = [];
+
+  var rutaFormatos = desktop + "\\Formatos";
+  try {
+    if (fso.FolderExists(rutaFormatos)) {
+      var formatosEnum = new Enumerator(fso.GetFolder(rutaFormatos).Files);
+      for (; !formatosEnum.atEnd(); formatosEnum.moveNext()) {
+        var archivo = formatosEnum.item();
+        var nombre = archivo.Name;
+        if (nombre.match(/\.(docx?|xlsx?|pdf|odt)$/i)) {
+          formatosDetectadosV2.push({
+            Nombre: nombre,
+            Ruta: archivo.Path
+          });
+        }
+      }
+    }
+  } catch (e) {
+    formatosDetectadosV2 = [];
+  }
+  formatosFiltradosV2 = formatosDetectadosV2.filter(function(f) {
+    return f.Nombre.toLowerCase().indexOf(document.getElementById("filtro-formatos-v2").value.trim().toLowerCase()) !== -1;
+  });
+  document.getElementById("cantidad-formatos-v2").textContent = formatosFiltradosV2.length;
+  renderizarListaFormatosV2();
+}
+
+function filtrarFormatosV2() {
+  // Similar a filtrarFormatos
+  formatosFiltradosV2 = formatosDetectadosV2.filter(function(f) {
+    return f.Nombre.toLowerCase().indexOf(document.getElementById("filtro-formatos-v2").value.trim().toLowerCase()) !== -1;
+  });
+  paginaFormatosV2 = 1;
+  renderizarListaFormatosV2();
+  // No resetear formatoSeleccionadoV2 aquí, se hace al seleccionar uno nuevo o cancelar.
+}
+
+function renderizarListaFormatosV2() {
+  // Similar a renderizarListaFormatos, pero para V2
+  var div = document.getElementById('lista-formatos-v2');
+  div.innerHTML = "";
+  if (formatosFiltradosV2.length === 0) {
+    div.innerHTML = "<span style='color:#888;'>No se encontraron formatos.</span>";
+    document.getElementById("cantidad-formatos-v2").textContent = "0";
+    return;
+  }
+  // Asumiendo paginación similar (variables paginaFormatosV2, formatosPorPaginaV2)
+  var formatosPorPaginaV2 = formatosPorPagina; // Reutilizar si es igual
+  var totalPaginas = Math.ceil(formatosFiltradosV2.length / formatosPorPaginaV2);
+  if (paginaFormatosV2 < 1) paginaFormatosV2 = 1;
+  if (paginaFormatosV2 > totalPaginas) paginaFormatosV2 = totalPaginas;
+  var inicio = (paginaFormatosV2 - 1) * formatosPorPaginaV2;
+  var fin = inicio + formatosPorPaginaV2;
+  var formatosPagina = formatosFiltradosV2.slice(inicio, fin);
+
+  for (var i = 0; i < formatosPagina.length; i++) {
+    var a = document.createElement("a");
+    a.textContent = formatosPagina[i].Nombre;
+    a.style.cursor = "pointer";
+    a.style.display = "block"; // Para mejor clic
+    a.style.marginBottom = "5px";
+    a.onclick = (function(idx) { return function() { seleccionarFormatoV2(inicio + idx); }; })(i);
+    if (formatoSeleccionadoV2 && formatoSeleccionadoV2.Nombre === formatosPagina[i].Nombre) {
+      a.style.fontWeight = "bold";
+      a.style.color = "#214c7b";
+    }
+    div.appendChild(a);
+  }
+
+  if (totalPaginas > 1) {
+    var paginador = document.createElement("div");
+    paginador.className = "pagina"; // Reutilizar clase CSS
+    paginador.style.marginTop = "12px";
+    paginador.style.textAlign = "center";
+    for (var p = 1; p <= totalPaginas; p++) {
+      var btn = document.createElement("button");
+      btn.textContent = p;
+      if (p == paginaFormatosV2) btn.className = "active"; // Reutilizar clase CSS
+      btn.style.margin = "0 2px";
+      btn.style.padding = "2px 8px";
+      btn.style.borderRadius = "5px";
+      btn.style.border = "1px solid #bccce7";
+      btn.onclick = (function(pg) { return function() { paginaFormatosV2 = pg; renderizarListaFormatosV2(); }; })(p);
+      paginador.appendChild(btn);
+    }
+    div.appendChild(paginador);
+  }
+  document.getElementById("cantidad-formatos-v2").textContent = formatosFiltradosV2.length;
+}
+
+function seleccionarFormatoV2(idx) {
+  formatoSeleccionadoV2 = formatosFiltradosV2[idx];
+  renderizarListaFormatosV2(); // Para re-renderizar y mostrar la selección
+  // No se avanza automáticamente, el usuario usa "Siguiente"
+}
+
+function llenarAniosOficioV2() {
+  // Similar a llenarAniosOficio
+  var select = document.getElementById("select-anio-oficio-v2");
+  if (!select) return;
+  // Solo llenar si está vacío para no perder selección si vuelve atrás
+  if (select.options.length > 0 && select.value !== "") return;
+
+  select.innerHTML = "";
+  var anios = [];
+  try {
+    var carpetaEnum = new Enumerator(fso.GetFolder(desktop).SubFolders);
+    for (; !carpetaEnum.atEnd(); carpetaEnum.moveNext()) {
+      var nombre = carpetaEnum.item().Name;
+      if (nombre.match(/^Año \d{4}$/)) anios.push(nombre.replace("Año ", ""));
+    }
+  } catch (e) {}
+  anios.sort().reverse(); // Mostrar más recientes primero
+  if (anios.length === 0) {
+    select.innerHTML = "<option value=''>No hay años</option>";
+  } else {
+     select.innerHTML = "<option value=''>Seleccione año...</option>"; // Opción por defecto
+    for (var i=0; i<anios.length; i++) {
+      var opt = document.createElement("option");
+      opt.value = anios[i];
+      opt.text = anios[i];
+      select.appendChild(opt);
+    }
+  }
+  llenarCasosOficioV2(); // Llama a llenar casos después de años
+}
+
+function llenarCasosOficioV2() {
+  // Similar a llenarCasosOficio
+  var anio = document.getElementById("select-anio-oficio-v2").value;
+  var selectCaso = document.getElementById('select-caso-oficio-v2');
+  if (!selectCaso) return;
+  selectCaso.innerHTML = "<option value=''>Seleccione caso...</option>"; // Opción por defecto
+  if (!anio) {
+    llenarSubcasosOficioV2(); // Limpiar subcasos si no hay año
+    actualizarNotaCasoOficioV2();
+    return;
+  }
+  var ruta = desktop + "\\Año " + anio;
+  if (!fso.FolderExists(ruta)) {
+    llenarSubcasosOficioV2(); // Limpiar subcasos si no existe ruta
+    actualizarNotaCasoOficioV2();
+    return;
+  }
+  var casos = [];
+  try {
+    var casoEnum = new Enumerator(fso.GetFolder(ruta).SubFolders);
+    for (; !casoEnum.atEnd(); casoEnum.moveNext()) {
+      casos.push(casoEnum.item().Name);
+    }
+  } catch(e) {}
+  casos.sort();
+  for (var i=0; i<casos.length; i++) {
+    var opt = document.createElement("option");
+    opt.value = casos[i];
+    opt.text = casos[i];
+    selectCaso.appendChild(opt);
+  }
+  selectCaso.onchange = function() {
+    llenarSubcasosOficioV2();
+    actualizarNotaCasoOficioV2();
+  };
+  llenarSubcasosOficioV2(); // Llama a llenar subcasos
+  actualizarNotaCasoOficioV2();
+}
+
+function llenarSubcasosOficioV2() {
+  // Similar a llenarSubcasosOficio, pero el select de subcaso no existe directamente.
+  // Esta función se usa para actualizar el botón/texto de subcaso seleccionado.
+  // La lógica de obtener subcasos se usará en abrirSelectorSubcasoOficioV2.
+  // Por ahora, solo actualiza la nota.
+  actualizarNotaCasoOficioV2();
+  // Si se deselecciona un caso, limpiar la selección de subcaso
+  var caso = document.getElementById("select-caso-oficio-v2").value;
+  if (!caso) {
+    subcasoOficioSeleccionadoV2 = "";
+    mostrarSubcasoSeleccionadoV2("");
+  }
+}
+
+
+function actualizarNotaCasoOficioV2() {
+  // Similar a actualizarNotaCasoOficio
+  var selectCaso = document.getElementById('select-caso-oficio-v2');
+  var nombreCasoNota = document.getElementById('nombre-caso-nota-oficio-v2');
+  var notaDiv = document.getElementById('nota-sin-subcaso-v2');
+
+  if (selectCaso && nombreCasoNota && notaDiv) {
+    if (selectCaso.value && selectCaso.options.length > 0 && selectCaso.selectedIndex > 0) { //selectedIndex > 0 para ignorar "Seleccione caso..."
+      var idx = selectCaso.selectedIndex;
+      var nombre = selectCaso.options[idx].text || selectCaso.options[idx].innerText || "";
+      nombreCasoNota.innerText = nombre;
+      notaDiv.style.display = "block";
+    } else {
+      nombreCasoNota.innerText = "el caso seleccionado"; // Texto genérico
+      notaDiv.style.display = "none"; // Ocultar si no hay caso
+    }
+  }
+}
+
+
+function abrirSelectorSubcasoOficioV2() {
+  var anioElement = document.getElementById('select-anio-oficio-v2');
+  var casoElement = document.getElementById('select-caso-oficio-v2');
+
+  if (!anioElement || !casoElement) {
+    alert("Error interno: No se encontraron los elementos de selección de año o caso. Contacte al administrador.");
+    return;
+  }
+
+  var anio = anioElement.value;
+  var caso = casoElement.value;
+
+  if (!anio || anio === "") { // Más explícito que solo !anio
+    alert("Por favor, seleccione un AÑO antes de buscar subcasos.");
+    return;
+  }
+  if (!caso || caso === "") { // Más explícito que solo !caso
+    alert("Por favor, seleccione un CASO antes de buscar subcasos.");
+    return;
+  }
+  
+  var ruta = desktop + "\\Año " + anio + "\\" + caso;
+  var subcasos = [];
+
+  try {
+    if (!fso) { // Verificar si fso está disponible
+        alert("Error crítico: FileSystemObject no está disponible. La funcionalidad de archivos no operará.");
+        return;
+    }
+
+    if (fso.FolderExists(ruta)) {
+      var carpetaCasoObj = fso.GetFolder(ruta);
+      var subEnum = new Enumerator(carpetaCasoObj.SubFolders);
+      for (; !subEnum.atEnd(); subEnum.moveNext()) {
+        var nombreSubcaso = subEnum.item().Name;
+        var cantWords = 0;
+        try {
+          var carpetaSub = fso.GetFolder(ruta + "\\" + nombreSubcaso);
+          var files = new Enumerator(carpetaSub.Files);
+          for (; !files.atEnd(); files.moveNext()) {
+            var n = files.item().Name.toLowerCase();
+            if (n.indexOf(".doc") > -1 || n.indexOf(".docx") > -1) {
+              cantWords++;
+            }
+          }
+        } catch (eInner) {
+           // Silencioso para el usuario, pero loguear si es posible en un entorno de desarrollo.
+           // console.log("Nota: Error contando words en subcaso '" + nombreSubcaso + "': " + eInner.message);
+        }
+        subcasos.push({ nombre: nombreSubcaso, cantidadWords: cantWords });
+      }
+    } else {
+      alert("La carpeta para el caso '" + caso + "' del año " + anio + " no fue encontrada.\nRuta esperada: " + ruta + "\n\nVerifique que el año y caso existan en el escritorio.");
+      return; 
+    }
+  } catch (e) {
+    alert("Error al intentar acceder a las carpetas: " + e.message + "\n\nRevisando la ruta: " + ruta + "\n\nAsegúrese de que tiene permisos para acceder y que la ruta es correcta.");
+    return; 
+  }
+
+  if (subcasos.length === 0) {
+    alert("No se encontraron subcasos para el caso '" + caso + "' del año " + anio + ".\nPuede que la carpeta del caso esté vacía o no contenga subdirectorios.");
+    return;
+  }
+
+  abrirPanelSelector(subcasos, "Selecciona un subcaso para '" + caso + "'", function(nombreSeleccionado){
+    subcasoOficioSeleccionadoV2 = nombreSeleccionado;
+    mostrarSubcasoSeleccionadoV2(nombreSeleccionado);
+  });
+}
+
+function mostrarSubcasoSeleccionadoV2(nombre) {
+  // Similar a mostrarSubcasoSeleccionado
+  var contenedor = document.getElementById('subcaso-oficio-seleccionado-v2');
+  var botonSeleccionar = document.getElementById('boton-subcaso-oficio-v2');
+  if (!nombre || nombre === "") {
+    botonSeleccionar.style.display = ""; // Mostrar botón "Seleccionar"
+    contenedor.innerHTML = "";
+    subcasoOficioSeleccionadoV2 = "";
+  } else {
+    botonSeleccionar.style.display = "none"; // Ocultar botón "Seleccionar"
+    contenedor.innerHTML =
+      '<span style="font-size:1.08em;color:#17406a;font-weight:600;vertical-align:middle;">' + nombre + '</span>' +
+      '<button type="button" class="boton boton-naranja boton-pequeno" style="margin-left:18px;" onclick="cambiarSubcasoOficioV2()">Cambiar</button>';
+    subcasoOficioSeleccionadoV2 = nombre;
+  }
+}
+
+function cambiarSubcasoOficioV2() {
+  // Permite volver a mostrar el botón "Seleccionar"
+  mostrarSubcasoSeleccionadoV2("");
+  // Opcionalmente, reabrir el panel selector:
+  // abrirSelectorSubcasoOficioV2();
+}
+
+
+function generarResumenSeleccionV2() {
+  var resumenDiv = document.getElementById('resumen-seleccion-v2');
+  var html = "<h4>Resumen de la Selección:</h4>";
+  html += "<p><strong>Formato:</strong> " + (formatoSeleccionadoV2 ? formatoSeleccionadoV2.Nombre : "No seleccionado") + "</p>";
+  html += "<p><strong>Año:</strong> " + (document.getElementById('select-anio-oficio-v2').value || "No seleccionado") + "</p>";
+  html += "<p><strong>Caso:</strong> " + (document.getElementById('select-caso-oficio-v2').value || "No seleccionado") + "</p>";
+  html += "<p><strong>Subcaso:</strong> " + (subcasoOficioSeleccionadoV2 || "Ninguno") + "</p>";
+  html += "<p><strong>Nuevo Nombre:</strong> " + (document.getElementById('nuevo-nombre-oficio-v2').value.trim() || "No ingresado") + "</p>";
+  resumenDiv.innerHTML = html;
+
+  // Lógica para la vista previa de la cabecera (similar a la original)
+  var anio = document.getElementById("select-anio-oficio-v2").value;
+  var caso = document.getElementById("select-caso-oficio-v2").value;
+  var nombreNuevo = document.getElementById("nuevo-nombre-oficio-v2").value.trim();
+
+  if (anio && caso && nombreNuevo && formatoSeleccionadoV2) {
+    var rutaDestinoBase = desktop + "\\Año " + anio + "\\" + caso;
+    var rutaSubcasoCompleta = subcasoOficioSeleccionadoV2 ? rutaDestinoBase + "\\" + subcasoOficioSeleccionadoV2 : rutaDestinoBase;
+
+    var datosSubcasoParaCabecera = { nombre: subcasoOficioSeleccionadoV2 || caso, correo: "", radicado: "" };
+    var rutaDatosJson = rutaSubcasoCompleta + "\\.datos_subcaso.json";
+
+    if (fso.FileExists(rutaDatosJson)) {
+      try {
+        var f = fso.OpenTextFile(rutaDatosJson, 1);
+        var json = f.ReadAll();
+        f.Close();
+        var datosGuardados = JSON.parse(json);
+        datosSubcasoParaCabecera.correo = datosGuardados.correo || "";
+        datosSubcasoParaCabecera.radicado = datosGuardados.radicado || "";
+      } catch (e) { /* Ignorar error si el JSON no es válido */ }
+    }
+    
+    // Si no hay subcaso seleccionado, el "nombre de carpeta" para la cabecera será el nombre del caso.
+    // Si hay subcaso, será el nombre del subcaso.
+    var nombreParaCabecera = subcasoOficioSeleccionadoV2 ? subcasoOficioSeleccionadoV2 : caso;
+
+    document.getElementById('nombre-carpeta-oficio-v2').innerText = nombreParaCabecera;
+    var correoSpan = document.getElementById('correo-oficio-v2');
+    var radicadoSpan = document.getElementById('radicado-oficio-v2');
+
+    if (datosSubcasoParaCabecera.correo) {
+      correoSpan.style.display = '';
+      document.getElementById('correo-valor-v2').innerText = datosSubcasoParaCabecera.correo;
+    } else {
+      correoSpan.style.display = 'none';
+    }
+    if (datosSubcasoParaCabecera.radicado) {
+      radicadoSpan.style.display = '';
+      document.getElementById('radicado-valor-v2').innerText = datosSubcasoParaCabecera.radicado;
+    } else {
+      radicadoSpan.style.display = 'none';
+    }
+    // Mostrar la cabecera solo si hay correo o radicado, o si se decide mostrar siempre.
+    if (datosSubcasoParaCabecera.correo || datosSubcasoParaCabecera.radicado) {
+        document.getElementById('cabecera-oficio-preview-v2').style.display = 'block';
+    } else {
+        document.getElementById('cabecera-oficio-preview-v2').style.display = 'none';
+    }
+
+  } else {
+    document.getElementById('cabecera-oficio-preview-v2').style.display = 'none';
+  }
+}
+
+
+function copiarYCrearOficioV2() {
+  // Validaciones finales (aunque la mayoría se hicieron al pasar de paso)
+  var anio = document.getElementById("select-anio-oficio-v2").value;
+  var caso = document.getElementById("select-caso-oficio-v2").value;
+  var nombreNuevo = document.getElementById("nuevo-nombre-oficio-v2").value.trim();
+
+  if (!formatoSeleccionadoV2) {
+    alert("Error: No hay formato seleccionado.");
+    wizardIrPaso1();
+    return;
+  }
+  if (!anio || !caso || !nombreNuevo) {
+    alert("Error: Faltan datos de destino o nombre.");
+    wizardIrPaso2();
+    return;
+  }
+
+  // Lógica de creación (muy similar a copiarYCrearOficio original)
+  var rutaDestino = desktop + "\\Año " + anio + "\\" + caso;
+  if (subcasoOficioSeleccionadoV2) {
+    rutaDestino += "\\" + subcasoOficioSeleccionadoV2;
+  }
+
+  if (!fso.FolderExists(rutaDestino)) {
+    crearRutaCompleta(rutaDestino); // Reutilizar función si existe
+  }
+
+  var ext = formatoSeleccionadoV2.Nombre.split('.').pop();
+  var rutaFinal = rutaDestino + "\\" + nombreNuevo + "." + ext;
+
+  var datosParaReemplazo = {
+    nombre: subcasoOficioSeleccionadoV2 || caso, // Usa nombre de caso si no hay subcaso
+    correo: "",
+    radicado: ""
+  };
+  var rutaDatosJson = (subcasoOficioSeleccionadoV2 ? desktop + "\\Año " + anio + "\\" + caso + "\\" + subcasoOficioSeleccionadoV2 : rutaDestino) + "\\.datos_subcaso.json";
+  // Si NO hay subcaso, intentamos leer .datos_subcaso.json de la carpeta CASO (si aplica para casos también)
+  // OJO: La lógica original guardaba .datos_subcaso.json DENTRO del subcaso. Si un CASO puede tener estos datos,
+  // la ruta de lectura/escritura del JSON debe ajustarse. Asumimos que solo subcasos tienen .datos_subcaso.json.
+  
+  var rutaJsonObjetivo = "";
+  if (subcasoOficioSeleccionadoV2) {
+      rutaJsonObjetivo = desktop + "\\Año " + anio + "\\" + caso + "\\" + subcasoOficioSeleccionadoV2 + "\\.datos_subcaso.json";
+  }
+  // Si no hay subcaso, no intentamos leer datos de correo/radicado (o se ajusta la lógica si los casos pueden tenerlos)
+
+  if (rutaJsonObjetivo && fso.FileExists(rutaJsonObjetivo)) {
+    try {
+      var f = fso.OpenTextFile(rutaJsonObjetivo, 1);
+      var json = f.ReadAll();
+      f.Close();
+      var datosGuardados = JSON.parse(json);
+      datosParaReemplazo.correo = datosGuardados.correo || "";
+      datosParaReemplazo.radicado = datosGuardados.radicado || "";
+       // El 'nombre' para reemplazo ya se asignó arriba (subcaso o caso)
+    } catch (e) { /* Ignorar error */ }
+  }
+  
+  if (ext.toLowerCase() === "docx" || ext.toLowerCase() === "doc") {
+    try {
+      var word = new ActiveXObject("Word.Application");
+      word.Visible = false;
+      var doc = word.Documents.Add(formatoSeleccionadoV2.Ruta);
+
+      function reemplazarTextoWord(docInstance, buscar, reemplazo, opciones) {
+        var range = docInstance.Content;
+        range.Find.ClearFormatting();
+        range.Find.Text = buscar;
+        range.Find.Replacement.ClearFormatting();
+        if (opciones && opciones.bold) range.Find.Replacement.Font.Bold = true;
+        else range.Find.Replacement.Font.Bold = false;
+        range.Find.Replacement.Font.AllCaps = (opciones && opciones.uppercase) ? true : false;
+        range.Find.Replacement.Text = reemplazo || "";
+        range.Find.Execute(buscar, false, false, false, false, false, true, 1, false, reemplazo || "", 2);
+      }
+      
+      // NOMBRE DE CARPETA (mayúsculas y negrita) - Usa el nombre del subcaso si existe, sino el del caso.
+      reemplazarTextoWord(doc, "NOMBRE DE CARPETA", datosParaReemplazo.nombre, { bold: true, uppercase: true });
+      // nombre de carpeta (tipo oración, sin negrita, sin mayúsculas)
+      reemplazarTextoWord(doc, "nombre de carpeta", toSentenceCase(datosParaReemplazo.nombre), { bold: false, uppercase: false });
+      // NUMERO DE RADICADO
+      reemplazarTextoWord(doc, "NUMERO DE RADICADO", datosParaReemplazo.radicado, { bold: false, uppercase: false });
+      // CORREO
+      reemplazarTextoWord(doc, "CORREO", datosParaReemplazo.correo, { bold: false, uppercase: false });
+
+
+      doc.SaveAs(rutaFinal);
+      doc.Close(false);
+      word.Quit();
+
+      shell.Run('"' + rutaFinal + '"');
+      alert("Archivo Word creado y modificado correctamente en: " + rutaFinal);
+      cancelarWizardOficioV2(); // Reiniciar wizard
+      sincronizarTodo();
+      return;
+    } catch(e) {
+      alert("Error al crear/modificar el Word: " + e.message + "\n" + formatoSeleccionadoV2.Ruta + "\n" + rutaFinal);
+      try { if(doc) doc.Close(false); if(word) word.Quit(); } catch(err){}
+      return;
+    }
+  }
+
+  // Copia normal para otros formatos
+  try {
+    fso.CopyFile(formatoSeleccionadoV2.Ruta, rutaFinal, true); // true para sobrescribir si existe
+    shell.Run('"' + rutaFinal + '"');
+    alert("Archivo copiado correctamente en: " + rutaFinal);
+    cancelarWizardOficioV2(); // Reiniciar wizard
+    sincronizarTodo();
+  } catch(e) {
+    alert("Error al copiar el archivo: " + e.message + "\n" + formatoSeleccionadoV2.Ruta + "\n" + rutaFinal);
+  }
+}
+
+// Variables globales para paginación V2 (si se decide que sean separadas)
+var paginaFormatosV2 = 1;
+var formatosDetectadosV2 = [];
+var formatosFiltradosV2 = [];
+// const formatosPorPaginaV2 = 10; // O reutilizar la original 'formatosPorPagina'
+
 
 // Utilidad: Devuelve un array de años disponibles (extrae "Año 2025" → 2025) del escritorio
 function obtenerAniosEnEscritorio() {
@@ -2353,7 +3570,8 @@ function llenarSubcasosOficio() {
 var _callbackSeleccionUniversal = null;
 var _elementosPanelActuales = [];
 function abrirPanelSelector(elementos, titulo, callback) {
-  _elementosPanelActuales = elementos.slice();
+  // Asegurarse que elementos es un array para evitar error en .slice() si no lo es.
+  _elementosPanelActuales = Array.isArray(elementos) ? elementos.slice() : []; 
   _callbackSeleccionUniversal = callback;
   document.getElementById('buscador-panel-selector').value = '';
   document.getElementById('panel-lateral-titulo').innerText = titulo || 'Selecciona un elemento';
@@ -2364,21 +3582,18 @@ function abrirPanelSelector(elementos, titulo, callback) {
 
 function mostrarPanelLateralSelector(abrir) {
   var panel = document.getElementById('panel-lateral-selector');
+  if (!panel) {
+    // Este alert es más para depuración, en producción podría ser un log silencioso o nada.
+    // alert("Error crítico: Elemento 'panel-lateral-selector' no encontrado en el DOM.");
+    return; 
+  }
+  // Quitar la lógica de clases 'abierto' si solo se maneja por 'right', para simplificar.
   if (abrir) {
-    if (panel.className.indexOf('abierto') === -1) {
-      panel.className += (panel.className ? ' ' : '') + 'abierto';
-    }
     panel.style.right = "0";
   } else {
-    panel.className = panel.className.replace(/\babierto\b/g, '').replace(/\s{2,}/g, ' ').replace(/^\s+|\s+$/g, '');
-    panel.style.right = "-410px";
+    panel.style.right = "-410px"; // Asegúrate que -410px sea suficiente para ocultarlo completamente
   }
 }
-
-document.getElementById('cerrar-panel-selector-btn').onclick = function(){
-  mostrarPanelLateralSelector(false);
-  _callbackSeleccionUniversal = null;
-};
 if (document.attachEvent) {
   document.attachEvent('onkeydown', function(e){
     e = e || window.event;
@@ -2390,9 +3605,7 @@ if (document.attachEvent) {
     if ((e.key && e.key === "Escape") || (e.keyCode && e.keyCode === 27)) mostrarPanelLateralSelector(false);
   });
 }
-document.getElementById('buscador-panel-selector').oninput = function() {
-  mostrarElementosEnPanelSelector(this.value);
-};
+
 
 function mostrarElementosEnPanelSelector(filtro) {
   var lista = document.getElementById('lista-panel-selector');
@@ -2668,6 +3881,21 @@ function inicializarDashboard() {
   cargarAniosDisponibles();
   actualizarTarjetasEstadisticas();
   inicializarCalendario();
+
+  // Vinculación de eventos para el nuevo panel de subcasos V2
+  var btnCerrarPanelSubcasosV2 = document.getElementById('btn-cerrar-panel-subcasos-v2');
+  if (btnCerrarPanelSubcasosV2) {
+      btnCerrarPanelSubcasosV2.onclick = cerrarPanelSubcasosWizardV2;
+  } else {
+      // alert("Error: Botón btn-cerrar-panel-subcasos-v2 no encontrado durante la inicialización.");
+  }
+
+  var inputFiltroSubcasosV2 = document.getElementById('input-filtro-subcasos-v2');
+  if (inputFiltroSubcasosV2) {
+      inputFiltroSubcasosV2.onkeyup = filtrarSubcasosPanelV2;
+  } else {
+      // alert("Error: Input input-filtro-subcasos-v2 no encontrado durante la inicialización.");
+  }
 }
 
 // Cargar años disponibles analizando carpetas del escritorio
@@ -3039,6 +4267,20 @@ function buscarCasoUI() {
   renderTablaCasos();
   document.getElementById('panel-detalles-caso').style.display = 'none';
 }
+
+// <!-- Nuevo Panel Selector de Subcasos para Wizard V2 -->
+// <div id="panel-subcasos-wizard-v2" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,0.5); z-index:6000; align-items:center; justify-content:center;">
+//   <div style="background-color:#fff; padding:20px; border-radius:8px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); width:400px; max-width:90%;">
+//     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+//       <h3 style="margin:0; font-size:1.2em; color:#17406a;">Seleccionar Subcaso</h3>
+//       <button id="btn-cerrar-panel-subcasos-v2" style="background:none; border:none; font-size:1.5em; color:#888; cursor:pointer;">&times;</button>
+//     </div>
+//     <input id="input-filtro-subcasos-v2" type="text" placeholder="Filtrar subcasos..." style="width:100%; padding:8px 10px; margin-bottom:15px; border:1px solid #ccc; border-radius:4px; box-sizing:border-box;">
+//     <div id="lista-subcasos-wizard-v2" style="max-height:250px; overflow-y:auto; border:1px solid #eee; padding:5px;">
+//       <!-- Los subcasos se renderizarán aquí por JS -->
+//     </div>
+//   </div>
+// </div>
 
 function filtrarCasosUI() {
   paginaActual = 1;
@@ -3567,5 +4809,20 @@ function inicializarCalendario() {
     }
   }
 </script>
+
+<!-- Nuevo Panel Selector de Subcasos para Wizard V2 -->
+<div id="panel-subcasos-wizard-v2"> <!-- Estilos controlados por CSS -->
+  <div class="panel-subcasos-v2-content">
+    <div class="panel-subcasos-v2-header">
+      <h3>Seleccionar Subcaso</h3>
+      <button id="btn-cerrar-panel-subcasos-v2">&times;</button>
+    </div>
+    <input id="input-filtro-subcasos-v2" type="text" placeholder="Filtrar subcasos...">
+    <div id="lista-subcasos-wizard-v2">
+      <!-- Los subcasos se renderizarán aquí por JS -->
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
